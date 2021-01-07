@@ -84,8 +84,8 @@ function HomeworkEngager(props) {
 
   async function closeModalAndReview() {
     setActiveModal(null);
-    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.reviewHomework));
     await props.refreshHandler();
+    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.reviewHomework));
   }
 
   function handleHomeworkDataChange(data) {
