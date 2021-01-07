@@ -1,0 +1,44 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/animations.scss";
+
+.sectionFile {
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 5px 5px 0;
+  padding: 5px 8px;
+
+  &:hover {
+    background-color: rgba($border-color, 0.1);
+  }
+
+  svg {
+    margin-left: 10px;
+  }
+
+  .spinner {
+    display: none;
+  }
+
+  &.isDownloading {
+    opacity: 0.5;
+
+    span,
+    svg {
+      display: none;
+    }
+
+    .spinner {
+      display: block;
+      margin-left: 0;
+      animation: spin 1s infinite;
+    }
+  }
+}
+
+.sectionFilesWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1;
+}

@@ -31,7 +31,8 @@ function StudentDashboard() {
       setIsLoading(false);
     } else if (assignment.id) {
       fetchAndSetHomework();
-    }
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [assignment, homework]);
 
 
@@ -45,7 +46,9 @@ function StudentDashboard() {
           beganOnDate: moment().valueOf(),
           studentOwnerId: activeUser.id,
           assignmentId: assignment.id,
-          toolHomeworkData: {quizAnswers:Array(assignment.toolAssignmentData.quizQuestions.length).fill(-1)}
+          toolHomeworkData: {
+            plannerData: [...assignment.toolAssignmentData.plannerData],
+          },
 			  });
         const resultHomework = await API.graphql({query: createHomework, variables: {input: freshHomework}});
         console.warn("Successful in creating homework for this student");

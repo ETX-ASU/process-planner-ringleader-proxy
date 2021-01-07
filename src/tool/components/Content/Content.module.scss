@@ -1,0 +1,50 @@
+@import "../../styles/colors.scss";
+
+.split {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid $tab-border-color;
+  position: relative;
+  min-height: 200px;
+
+  > div {
+    padding: 10px;
+  }
+
+  &.readOnly {
+    > div {
+      flex: 1;
+
+      &:first-of-type {
+        border-right: 1px solid $tab-border-color;
+      }
+    }
+  }
+}
+
+.gutter {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 45%,
+    $tab-border-color 50%,
+    transparent 55%
+  );
+  cursor: col-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    color: $tab-border-color;
+  }
+
+  &.invisible {
+    display: none;
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+}

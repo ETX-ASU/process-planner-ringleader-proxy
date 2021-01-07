@@ -13,11 +13,11 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import HeaderBar from "../../app/components/HeaderBar";
 import ToggleSwitch from "../../app/components/ToggleSwitch";
 
-import QuizCreator from "../../tool/QuizCreator";
+import ProcessPlannerCreator from "../../tool/ProcessPlannerCreator";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 import {reportError} from "../../developer/DevUtils";
-import {createAssignmentInLms, handleConnectToLMS} from "../../lmsConnection/RingLeader";
-import {calcMaxScoreForAssignment} from "../../tool/ToolUtils";
+import {/*createAssignmentInLms,*/ handleConnectToLMS} from "../../lmsConnection/RingLeader";
+// import {calcMaxScoreForAssignment} from "../../tool/ToolUtils";
 
 const emptyAssignment = {
   id: '',
@@ -33,15 +33,9 @@ const emptyAssignment = {
   isUseAutoSubmit: false,
 
   // This data is specific to the tool (Quiz tool data is just an array of questions & answers)
-  toolAssignmentData: {
-    quizQuestions: [{
-      questionText: '',
-      answerOptions: ['', ''],
-      correctAnswerIndex: 0,
-      progressPointsForCompleting: 1,
-      gradePointsForCorrectAnswer: 10
-    }]
-  }
+  isArchived: false,
+  isFavorite: false,
+  toolAssignmentData: {},
 };
 
 
@@ -79,7 +73,7 @@ function AssignmentCreator() {
     setFormData({...formData, isUseAutoScore: !formData.isUseAutoScore, isUseAutoSubmit:false});
   }
 
-  function handleQuizChanges(toolAssignmentData) {
+  function handleToolChanges(toolAssignmentData) {
     setFormData({...formData, toolAssignmentData});
   }
 
@@ -108,6 +102,9 @@ function AssignmentCreator() {
             <p>Assignment has been saved! In order to access it, use this assignmentId: ${activeModal.id}</p>
           </ConfirmationModal>
         );
+      default: {
+        return null;
+      }
     }
   }
 
@@ -161,10 +158,15 @@ function AssignmentCreator() {
         </Row>
         }
         </Container>
-
-        {/*The assignment data collected here is specific to the tool, while the above assignment data is used in every tool*/}
-        <QuizCreator isUseAutoScore={formData.isUseAutoScore} toolAssignmentData={formData.toolAssignmentData} updateToolAssignmentData={handleQuizChanges}/>
       </form>
+
+      {/* The assignment data collected here is specific to the tool, while the above assignment data is used in every tool */}
+      <ProcessPlannerCreator
+        isUseAutoScore={formData.isUseAutoScore}
+        userId={activeUser.id}
+        toolAssignmentData={formData.toolAssignmentData}
+        updateToolAssignmentData={handleToolChanges}
+      />
     </Fragment>
   )
 }

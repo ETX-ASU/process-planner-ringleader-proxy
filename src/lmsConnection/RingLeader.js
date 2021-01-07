@@ -7,7 +7,7 @@ import {
   mockGetAssignedStudents,
   mockGetUnassignedStudents,
   mockGetGrades,
-  mockGetStudentGrade,
+  // mockGetStudentGrade,
   mockInstructorSendGradeToLMS,
   mockAutoSendGradeToLMS,
   mockSubmitResourceSelection

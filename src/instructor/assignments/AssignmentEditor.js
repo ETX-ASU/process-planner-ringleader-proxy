@@ -8,7 +8,7 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import "./assignments.scss";
 import HeaderBar from "../../app/components/HeaderBar";
 import ToggleSwitch from "../../app/components/ToggleSwitch";
-import QuizCreator from "../../tool/QuizCreator";
+import ProcessPlannerEditor from "../../tool/ProcessPlannerEditor";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
@@ -20,6 +20,7 @@ import { v4 as uuid } from "uuid";
 function AssignmentEditor() {
   const dispatch = useDispatch();
   const urlAssignmentId = useSelector(state => state.app.assignmentId);
+  const activeUser = useSelector((state) => state.app.activeUser);
   const [formData, setFormData] = useState(useSelector(state => state.app.assignment));
   const isLimitedEditing = useSelector(state => Boolean(state.app.homeworks?.length));
   const [activeModal, setActiveModal] = useState(null);
@@ -64,7 +65,7 @@ function AssignmentEditor() {
     setFormData({...formData, isUseAutoScore: !formData.isUseAutoScore, isUseAutoSubmit: false});
   }
 
-  function handleQuizChanges(toolAssignmentData) {
+  function handleToolChanges(toolAssignmentData) {
     setFormData({...formData, toolAssignmentData});
   }
 
@@ -169,13 +170,15 @@ function AssignmentEditor() {
           </Row>
           }
         </Container>
-
-        <QuizCreator
-          isLimitedEditing={isLimitedEditing}
-          isUseAutoScore={formData.isUseAutoScore}
-          toolAssignmentData={formData.toolAssignmentData}
-          updateToolAssignmentData={handleQuizChanges}/>
       </form>
+
+      <ProcessPlannerEditor
+        isLimitedEditing={isLimitedEditing}
+        isUseAutoScore={formData.isUseAutoScore}
+        userId={activeUser.id}
+        toolAssignmentData={formData.toolAssignmentData}
+        updateToolAssignmentData={handleToolChanges}
+      />
     </Fragment>
   )
 }

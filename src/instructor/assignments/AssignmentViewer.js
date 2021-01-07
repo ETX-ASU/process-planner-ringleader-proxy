@@ -53,15 +53,17 @@ function AssignmentViewer(props) {
 
 
   useEffect(() => {
-    console.log('assignment changed')
+    // console.log('assignment changed')
     if (!assignment?.id) return;
     console.log('fetching scores etc')
     fetchScores();
     fetchBatchOfHomeworks('INIT');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [assignment.id, assignment]);
 
   useEffect(() => {
     if (nextTokenVal) fetchBatchOfHomeworks(nextTokenVal);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nextTokenVal]);
 
 
@@ -222,6 +224,9 @@ function AssignmentViewer(props) {
             <p className='mt-3'>This make take a few moments.</p>
           </ConfirmationModal>
         );
+
+      default:
+        return null;
     }
   }
 

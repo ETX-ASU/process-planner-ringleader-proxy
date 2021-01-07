@@ -14,6 +14,8 @@ import LoadingIndicator from "../../app/components/LoadingIndicator";
 import HeaderBar from "../../app/components/HeaderBar";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 
+import { AssignmentsList } from "../../tool/components/AssignmentsList/AssignmentsList";
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
@@ -35,6 +37,7 @@ function AssignmentNewOrDupe() {
 
   useEffect(() => {
     fetchAssignmentList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -132,6 +135,8 @@ function AssignmentNewOrDupe() {
             <p>Your assignment "{activeModal.data[0]}" has been recovered. You will now be taken to a screen so you can edit and customize this recovered assignment.</p>
           </ConfirmationModal>
         );
+      default:
+        return null;
     }
   }
 
@@ -143,7 +148,7 @@ function AssignmentNewOrDupe() {
         <Button disabled>Update</Button>
       </HeaderBar>
 
-      <Container className='m-2'>
+      <Container className="m-2" style={{ position: "relative" }}>
         {isFetchingAssignments &&
           <Row>
             <LoadingIndicator className='p-4 text-center h-100 align-middle' isDarkSpinner={true} loadingMsg={'FETCHING DATA'} size={3} />
@@ -224,6 +229,7 @@ function AssignmentNewOrDupe() {
         </Fragment>
         }
       </Container>
+      {assignments.length > 0 && <AssignmentsList list={assignments} />}
     </Fragment>
   )
 }

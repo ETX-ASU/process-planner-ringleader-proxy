@@ -8,7 +8,7 @@ import {sendInstructorGradeToLMS} from "../../../lmsConnection/RingLeader";
 
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowCircleLeft, faArrowCircleRight, faCaretUp, faCheck} from "@fortawesome/free-solid-svg-icons";
+import {faArrowCircleLeft, faArrowCircleRight, /*faCaretUp,*/ faCheck} from "@fortawesome/free-solid-svg-icons";
 import {calcMaxScoreForAssignment} from "../../../tool/ToolUtils";
 import {reportError} from "../../../developer/DevUtils";
 
@@ -28,6 +28,7 @@ function GradingBar(props) {
   useEffect(() => {
     setComment(reviewedStudent.comment || '');
     setScoreGiven(calcShownScore(reviewedStudent));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reviewedStudent.scoreGiven, reviewedStudent.id, reviewedStudent.comment, reviewedStudent.homeworkStatus])
 
   function calcShownScore({homeworkStatus, scoreGiven, autoScore}) {

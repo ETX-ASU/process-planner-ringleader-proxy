@@ -4,11 +4,13 @@ import {HOMEWORK_PROGRESS} from "../../app/constants";
 import {Container, Row, Col} from 'react-bootstrap';
 import "../../student/homeworks/homeworks.scss";
 import GradingBar from "./gradingBar/GradingBar";
-import QuizViewerAndEngager from "../../tool/QuizViewerAndEngager";
+import HomeworkEditor from "../../tool/HomeworkEditor";
+import { noop } from "../../tool/utils/core";
 
 
 function HomeworkReview(props) {
   const {students, reviewedStudentId, assignment} = props;
+  const activeUser = useSelector((state) => state.app.activeUser);
 
   const [reviewedStudent, setReviewedStudent] = useState(students.find(s => s.id === reviewedStudentId));
   const isHideStudentIdentity = useSelector(state => state.app.isHideStudentIdentity);
@@ -21,9 +23,6 @@ function HomeworkReview(props) {
 
   function getStatusMsg() {
     const studentRefName = getStudentRefName();
-    if(reviewedStudent.homeworkStatus === HOMEWORK_PROGRESS.fullyGraded && !reviewedStudent?.homework?.toolHomeworkData?.quizAnswers?.length) {
-      return `${studentRefName} did no work, but you have already given them a grade anyway.`;
-    }
 
     switch(reviewedStudent.homeworkStatus) {
       case(HOMEWORK_PROGRESS.notBegun): return `${studentRefName} has not started their work yet.`;
@@ -71,11 +70,13 @@ function HomeworkReview(props) {
         }
 
         {isShowWork() &&
-          <QuizViewerAndEngager
-            isReadOnly={true}
-            isShowCorrect={true}
-            toolAssignmentData={assignment.toolAssignmentData}
-            toolHomeworkData={reviewedStudent.homework.toolHomeworkData} />
+          <HomeworkEditor
+            isReadOnly
+            userId={activeUser.id}
+            toolHomeworkData={reviewedStudent.homework.toolHomeworkData}
+            assignmentConfig={assignment.toolAssignmentData.plannerConfig}
+            updateToolHomeworkData={noop}
+          />
         }
 
         {!isShowWork() &&

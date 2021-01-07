@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react';
 import moment from "moment";
 import {useDispatch, useSelector} from "react-redux";
 import {ACTIVITY_PROGRESS, HOMEWORK_PROGRESS, MODAL_TYPES, UI_SCREEN_MODES} from "../../app/constants";
-import {Button, Container, Row, Col} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import {updateHomework as updateHomeworkMutation} from "../../graphql/mutations";
 import {API} from "aws-amplify";
 import {setActiveUiScreenMode} from "../../app/store/appReducer";
@@ -12,7 +12,7 @@ import {reportError} from "../../developer/DevUtils";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
 import ConfirmationModal from "../../app/components/ConfirmationModal";
-import QuizViewerAndEngager from "../../tool/QuizViewerAndEngager";
+import HomeworkEditor from "../../tool/HomeworkEditor";
 import {sendAutoGradeToLMS} from "../../lmsConnection/RingLeader";
 import {calcAutoScore, calcMaxScoreForAssignment} from "../../tool/ToolUtils";
 
@@ -34,9 +34,11 @@ function HomeworkEngager(props) {
 	async function submitHomeworkForReview() {
     setActiveModal(null);
 
+    const { plannerData, files } = toolHomeworkData;
+
     try {
       const inputData = Object.assign({}, homework, {
-        toolHomeworkData,
+        toolHomeworkData: { plannerData, files },
         beganOnDate: (homework.beganOnDate) ? homework.beganOnDate : moment().valueOf(),
         submittedOnDate: (homework.submittedOnDate) ? homework.submittedOnDate : moment().valueOf()
       });
@@ -113,6 +115,9 @@ function HomeworkEngager(props) {
             <p>You can now review your submitted assignment.</p>
           </ConfirmationModal>
         )
+
+      default:
+        return null;
     }
   }
 
@@ -123,30 +128,16 @@ function HomeworkEngager(props) {
         <Button onClick={() => setActiveModal({type:MODAL_TYPES.warningBeforeHomeworkSubmission})}>Submit</Button>
       </HeaderBar>
 
-			<form>
-        <Container className='mt-2 ml-1 mr-2'>
-          <Row className={'mt-4'}>
-            <Col><p>{assignment.summary}</p></Col>
-          </Row>
-        </Container>
-
-        <Container className='pb-5'>
-          <QuizViewerAndEngager
-            isReadOnly={false}
-            isShowCorrect={false}
-            toolAssignmentData={assignment.toolAssignmentData}
-            toolHomeworkData={toolHomeworkData}
-            updateToolHomeworkData={handleHomeworkDataChange}
-            triggerAutoSave={autoSave} />
-        </Container>
-
-			</form>
-
-      <Row>
-        <Col className='text-right mr-4'>
-          <Button onClick={() => setActiveModal({type:MODAL_TYPES.warningBeforeHomeworkSubmission})}>Submit</Button>
-        </Col>
-      </Row>
+			<HomeworkEditor
+        isReadOnly={false}
+        userId={activeUser.id}
+        summary={assignment.summary}
+        title={assignment.title}
+        assignmentConfig={assignment.toolAssignmentData.plannerConfig}
+        toolHomeworkData={toolHomeworkData}
+        triggerAutoSave={autoSave}
+        updateToolHomeworkData={handleHomeworkDataChange}
+      />
 		</Fragment>
 	)
 }

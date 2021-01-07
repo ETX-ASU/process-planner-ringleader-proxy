@@ -1,0 +1,97 @@
+@import "../../styles/colors.scss";
+
+.tabs {
+  border-bottom: 1px solid $tab-border-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.tabItem {
+  align-items: center;
+  background-color: $tab-inactive-background-color;
+  border: 1px solid $tab-border-color;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: $tab-text-color;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  font-weight: 300;
+  margin-bottom: -1px;
+  padding: 0 1rem;
+  position: relative;
+  text-decoration: none;
+
+  &.isEdited {
+    padding: 0;
+  }
+
+  &.isDraggable {
+    span {
+      cursor: move;
+    }
+  }
+
+  &.isDragOver {
+    &:before {
+      content: "";
+      background-color: rgba($tab-text-color, 0.6);
+      height: calc(100% + 10px);
+      position: absolute;
+      right: calc(100% - 5px);
+      top: -5px;
+      width: 10px;
+    }
+  }
+
+  span {
+    padding: 0.5rem 1rem 0.5rem 0;
+    white-space: nowrap;
+  }
+
+  svg {
+    margin: 0 5px;
+    color: $tab-icon-color;
+
+    &:hover {
+      path {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  input {
+    background-color: transparent;
+    border: 0;
+    font-size: 0.85rem;
+    outline: 1px solid transparent;
+    padding: 0.5rem 1rem;
+  }
+
+  &.active {
+    background-color: $tab-background-color;
+    border-color: $tab-border-color $tab-border-color #fff;
+  }
+}
+
+.addTabButton {
+  align-self: center;
+  align-items: center;
+  background-color: $tab-inactive-background-color;
+  border: 1px solid $tab-border-color;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.content {
+  border: 1px solid $tab-border-color;
+  border-top: 0;
+  padding: 10px;
+}

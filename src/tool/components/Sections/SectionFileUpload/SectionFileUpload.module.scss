@@ -1,0 +1,46 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/animations.scss";
+
+.button {
+  align-items: center;
+  border: 1px solid transparent;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: hidden;
+  padding: 5px 8px;
+  position: relative;
+  width: 107px;
+
+  .spinner {
+    display: none;
+  }
+
+  &.isUploading {
+    span,
+    svg,
+    input {
+      display: none;
+    }
+
+    .spinner {
+      display: block;
+      animation: spin 1s infinite;
+    }
+  }
+
+  span {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  input {
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,55 @@
+@import "../../styles/colors.scss";
+
+.list {
+  margin-top: 30px;
+
+  td {
+    cursor: pointer;
+  }
+
+  th {
+    cursor: pointer;
+    user-select: none;
+
+    svg {
+      margin-left: 10px;
+    }
+  }
+
+  th,
+  .noWrap {
+    white-space: nowrap;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      cursor: pointer;
+      margin: 0 10px;
+    }
+  }
+}
+
+.section {
+  margin: 15px;
+
+  h3 {
+    background-color: #ccc;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px 10px;
+    user-select: none;
+
+    svg {
+      margin-right: 10px;
+    }
+  }
+}

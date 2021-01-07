@@ -1,0 +1,129 @@
+@import "../../../styles/colors.scss";
+
+@mixin section {
+  border: 1px solid $tab-border-color;
+  width: 100%;
+  padding: 5px;
+  min-height: 120px;
+}
+
+@mixin flex {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.section {
+  margin-bottom: 20px;
+
+  &.text {
+    .textSection {
+      @include section;
+    }
+
+    textarea {
+      @include section;
+      resize: vertical;
+
+      &::placeholder {
+        color: $tab-icon-color;
+        font-style: italic;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &.checklist {
+    ul {
+      @include section;
+      list-style: none;
+      margin: 0;
+
+      li {
+        @include flex;
+        justify-content: space-between;
+        width: 100%;
+
+        label {
+          @include flex;
+        }
+
+        input[type="checkbox"] {
+          margin-right: 10px;
+        }
+
+        span {
+          display: block;
+        }
+
+        input[type="text"] {
+          background-color: #fff;
+          border: none;
+          display: none;
+
+          &::placeholder {
+            color: $tab-icon-color;
+            font-style: italic;
+          }
+        }
+
+        &.isEdited {
+          span {
+            display: none;
+          }
+
+          input[type="text"] {
+            display: block;
+          }
+        }
+
+        &.newItem {
+          input[type="text"] {
+            display: block;
+            width: 200px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.actions {
+  svg {
+    cursor: pointer;
+    color: $tab-icon-color;
+    margin-right: 10px;
+  }
+}
+
+.sectionTitle {
+  @include flex;
+  border: 1px solid $tab-inactive-background-color;
+  padding: 2px 5px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 18px;
+
+  &.isEdited {
+    justify-content: stretch;
+  }
+
+  input {
+    font-weight: bold;
+    outline: 0;
+    padding: 2px 5px;
+    width: 100%;
+  }
+}
+
+.sectionFiles {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 5px;
+}

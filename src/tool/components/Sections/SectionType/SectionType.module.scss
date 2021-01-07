@@ -1,0 +1,53 @@
+@import "../../../styles/colors.scss";
+
+.sectionType {
+  align-items: center;
+  background-color: $tab-inactive-background-color;
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  height: 34px;
+  padding: 5px 10px;
+
+  span {
+    font-weight: bold;
+    margin-right: 10px;
+
+    &.label {
+      font-weight: normal;
+    }
+  }
+
+  .switch {
+    input:checked ~ label::before {
+      background-color: $switch-background-color;
+      border-color: $switch-color;
+    }
+
+    input:checked ~ label::after {
+      background-color: $switch-color !important;
+    }
+  }
+}
+
+.readOnly {
+  .label {
+    display: none;
+  }
+
+  &.text {
+    .text {
+      display: block;
+    }
+  }
+
+  &.checklist {
+    .checklist {
+      display: block;
+    }
+  }
+
+  .switch {
+    display: none;
+  }
+}
