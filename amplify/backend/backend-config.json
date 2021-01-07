@@ -16,5 +16,13 @@
         }
       }
     }
+  },
+  "auth": {
+    "processplannerdf68f273": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
   }
 }

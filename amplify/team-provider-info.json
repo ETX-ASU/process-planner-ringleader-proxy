@@ -10,6 +10,11 @@
       "StackName": "amplify-processplanner-dev-74835",
       "StackId": "arn:aws:cloudformation:us-west-2:540838891768:stack/amplify-processplanner-dev-74835/6145c5b0-50b4-11eb-872a-0aff8a16809b",
       "AmplifyAppId": "d2cx84babvjpbq"
+    },
+    "categories": {
+      "auth": {
+        "processplannerdf68f273": {}
+      }
     }
   }
 }
