@@ -2,12 +2,46 @@
 ## HOWEVER, in order to work with AWS "amplify push" calls, you MUST manually copy this file
 ## into your amplify/backend/api/project-name/ directory before calling "amplify push"
 
-type QuizQuestion {
-  questionText: String!
-  answerOptions: [String]
-  correctAnswerIndex: Int
-  progressPointsForCompleting: Int
-  gradePointsForCorrectAnswer: Int
+type PlannerChecklistItem {
+  id: String
+  label: String
+  done: Boolean
+}
+
+type PlannerSection {
+  id: String
+  ownerId: String!
+  title: String
+  type: String
+  text: String
+  items: [PlannerChecklistItem]
+}
+
+type PlannerContent {
+  description: String
+  paneSize: Int
+  sections: [PlannerSection]
+}
+
+type PlannerTab {
+  id: String!
+  title: String!
+  content: PlannerContent!
+  ownerId: String!
+}
+
+type PlannerConfig {
+  studentAccessLevel: String
+  dueDate: String
+  minWordsCount: Int
+  minChecklistItems: Int
+  maxScore: Int
+}
+
+type HomeworkFile {
+  sectionId: ID!
+  fileName: String
+  fileKey: String
 }
 
 type Assignment @model {
@@ -23,6 +57,8 @@ type Assignment @model {
   isLockedOnSubmission: Boolean
   isUseAutoScore: Boolean
   isUseAutoSubmit: Boolean
+  isArchived: Boolean
+  isFavorite: Boolean
   toolAssignmentData: ToolAssignmentData
 }
 
@@ -37,9 +73,11 @@ type Homework @model {
 }
 
 type ToolAssignmentData {
-  quizQuestions: [QuizQuestion]
+  plannerData: [PlannerTab]
+  plannerConfig: PlannerConfig
 }
 
 type ToolHomeworkData {
-  quizAnswers: [Int]
+  plannerData: [PlannerTab]
+  files: [HomeworkFile]
 }

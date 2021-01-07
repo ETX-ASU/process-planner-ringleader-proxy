@@ -16,13 +16,20 @@ export const onCreateAssignment = /* GraphQL */ `
       isLockedOnSubmission
       isUseAutoScore
       isUseAutoSubmit
+      isArchived
+      isFavorite
       toolAssignmentData {
-        quizQuestions {
-          questionText
-          answerOptions
-          correctAnswerIndex
-          progressPointsForCompleting
-          gradePointsForCorrectAnswer
+        plannerData {
+          id
+          title
+          ownerId
+        }
+        plannerConfig {
+          studentAccessLevel
+          dueDate
+          minWordsCount
+          minChecklistItems
+          maxScore
         }
       }
       createdAt
@@ -45,13 +52,20 @@ export const onUpdateAssignment = /* GraphQL */ `
       isLockedOnSubmission
       isUseAutoScore
       isUseAutoSubmit
+      isArchived
+      isFavorite
       toolAssignmentData {
-        quizQuestions {
-          questionText
-          answerOptions
-          correctAnswerIndex
-          progressPointsForCompleting
-          gradePointsForCorrectAnswer
+        plannerData {
+          id
+          title
+          ownerId
+        }
+        plannerConfig {
+          studentAccessLevel
+          dueDate
+          minWordsCount
+          minChecklistItems
+          maxScore
         }
       }
       createdAt
@@ -74,13 +88,20 @@ export const onDeleteAssignment = /* GraphQL */ `
       isLockedOnSubmission
       isUseAutoScore
       isUseAutoSubmit
+      isArchived
+      isFavorite
       toolAssignmentData {
-        quizQuestions {
-          questionText
-          answerOptions
-          correctAnswerIndex
-          progressPointsForCompleting
-          gradePointsForCorrectAnswer
+        plannerData {
+          id
+          title
+          ownerId
+        }
+        plannerConfig {
+          studentAccessLevel
+          dueDate
+          minWordsCount
+          minChecklistItems
+          maxScore
         }
       }
       createdAt
@@ -98,7 +119,16 @@ export const onCreateHomework = /* GraphQL */ `
       submittedOnDate
       isLocked
       toolHomeworkData {
-        quizAnswers
+        plannerData {
+          id
+          title
+          ownerId
+        }
+        files {
+          sectionId
+          fileName
+          fileKey
+        }
       }
       createdAt
       updatedAt
@@ -115,7 +145,16 @@ export const onUpdateHomework = /* GraphQL */ `
       submittedOnDate
       isLocked
       toolHomeworkData {
-        quizAnswers
+        plannerData {
+          id
+          title
+          ownerId
+        }
+        files {
+          sectionId
+          fileName
+          fileKey
+        }
       }
       createdAt
       updatedAt
@@ -132,7 +171,16 @@ export const onDeleteHomework = /* GraphQL */ `
       submittedOnDate
       isLocked
       toolHomeworkData {
-        quizAnswers
+        plannerData {
+          id
+          title
+          ownerId
+        }
+        files {
+          sectionId
+          fileName
+          fileKey
+        }
       }
       createdAt
       updatedAt

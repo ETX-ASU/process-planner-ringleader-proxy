@@ -16,13 +16,36 @@ export const getAssignment = /* GraphQL */ `
       isLockedOnSubmission
       isUseAutoScore
       isUseAutoSubmit
+      isArchived
+      isFavorite
       toolAssignmentData {
-        quizQuestions {
-          questionText
-          answerOptions
-          correctAnswerIndex
-          progressPointsForCompleting
-          gradePointsForCorrectAnswer
+        plannerData {
+          id
+          title
+          content {
+            description
+            paneSize
+            sections {
+              id
+              ownerId
+              title
+              type
+              text
+              items {
+                id
+                label
+                done
+              }
+            }
+          }
+          ownerId
+        }
+        plannerConfig {
+          studentAccessLevel
+          dueDate
+          minWordsCount
+          minChecklistItems
+          maxScore
         }
       }
       createdAt
@@ -50,6 +73,34 @@ export const listAssignments = /* GraphQL */ `
         isLockedOnSubmission
         isUseAutoScore
         isUseAutoSubmit
+        isArchived
+        isFavorite
+        toolAssignmentData {
+          plannerData {
+            id
+            title
+            content {
+              description
+              paneSize
+              sections {
+                id
+                ownerId
+                title
+                type
+                text
+                items {
+                  id
+                  label
+                  done
+                }
+              }
+            }
+            ownerId
+          }
+          plannerConfig {
+            dueDate
+          }
+        }
         createdAt
         updatedAt
       }
@@ -67,7 +118,32 @@ export const getHomework = /* GraphQL */ `
       submittedOnDate
       isLocked
       toolHomeworkData {
-        quizAnswers
+        plannerData {
+          id
+          title
+          content {
+            description
+            paneSize
+            sections {
+              id
+              ownerId
+              title
+              type
+              text
+              items {
+                id
+                label
+                done
+              }
+            }
+          }
+          ownerId
+        }
+        files {
+          sectionId
+          fileName
+          fileKey
+        }
       }
       createdAt
       updatedAt
@@ -89,7 +165,32 @@ export const listHomeworks = /* GraphQL */ `
         submittedOnDate
         isLocked
         toolHomeworkData {
-          quizAnswers
+          plannerData {
+            id
+            title
+            content {
+              description
+              paneSize
+              sections {
+                id
+                ownerId
+                title
+                type
+                text
+                items {
+                  id
+                  label
+                  done
+                }
+              }
+            }
+            ownerId
+          }
+          files {
+            sectionId
+            fileName
+            fileKey
+          }
         }
         createdAt
         updatedAt
