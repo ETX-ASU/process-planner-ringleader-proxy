@@ -1,6 +1,6 @@
 {
     "identityPoolName": "processplannerdf68f273_identitypool_df68f273",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "procesdf68f273",
     "userPoolName": "processplannerdf68f273_userpool_df68f273",
     "autoVerifiedAttributes": [
