@@ -202,12 +202,12 @@ function AssignmentViewer(props) {
             <p>Submit auto-scores for...</p>
             <form id={'batchSubmitModalForm'} >
               <div className='ml-4'>
-                <input type="radio" name={`modalRadioOpts`} value={SUBMISSION_MODAL_OPTS.all} />
-                <label className='ml-2'>All students, including those who did not submit any work</label>
+                <input type="radio" name={`modalRadioOpts`} value={SUBMISSION_MODAL_OPTS.all} id="batch-all" />
+                <label className='ml-2' htmlFor="batch-all">All students, including those who did not submit any work</label>
               </div>
               <div className='ml-4'>
-                <input type="radio" name={`modalRadioOpts`} defaultChecked={true} value={SUBMISSION_MODAL_OPTS.submittedOnly} />
-                <label className='ml-2'>Only students who submitted their work</label>
+                <input type="radio" name={`modalRadioOpts`} defaultChecked={true} value={SUBMISSION_MODAL_OPTS.submittedOnly} id="batch-submitted" />
+                <label className='ml-2' htmlFor="batch-submitted">Only students who submitted their work</label>
               </div>
             </form>
             <p className='mt-3'>Note: batch auto submission will <em>not</em> overwrite any scores you previously submitted.</p>
