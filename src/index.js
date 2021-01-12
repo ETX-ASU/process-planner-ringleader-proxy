@@ -10,13 +10,10 @@ import config from './aws-exports';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './app/combinedStore';
-import { SetDevMode } from "./tool/SetDevMode"
 
-
-const isStoredDevModeFlag = sessionStorage.getItem("isDevMode") !== null
 
 // THIS SHOULD BE SET TO FALSE FOR LIVE PRODUCTION VERSION
-window.isDevMode = process.env.REACT_APP_DEV_MODE === "true" || isStoredDevModeFlag;
+window.isDevMode = process.env.REACT_APP_DEV_MODE === "true";
 window.isMockingFailures = false;
 
 Amplify.configure(config);
@@ -26,7 +23,6 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         {/*<Route path='/select' component={SelectionTool} />*/}
-        <Route path='/devmode' component={SetDevMode} />
         <Route path='/' component={App} />
       </Switch>
     </BrowserRouter>
