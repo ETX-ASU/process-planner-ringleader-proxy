@@ -30,6 +30,8 @@ function HomeworkEngager(props) {
 	const [toolHomeworkData, setToolHomeworkData] = useState(Object.assign({}, homework.toolHomeworkData));
   const [activeModal, setActiveModal] = useState(null);
 
+  const assignmentConfig = assignment.toolAssignmentData.plannerConfig;
+  const isAfterDueDate = moment().isSameOrAfter(assignmentConfig.dueDate);
 
 	async function submitHomeworkForReview() {
     setActiveModal(null);
@@ -124,16 +126,18 @@ function HomeworkEngager(props) {
 	return (
 		<Fragment>
       {activeModal && renderModal()}
-      <HeaderBar title={assignment.title}>
-        <Button onClick={() => setActiveModal({type:MODAL_TYPES.warningBeforeHomeworkSubmission})}>Submit</Button>
-      </HeaderBar>
+      {!isAfterDueDate && (
+        <HeaderBar title={assignment.title}>
+          <Button onClick={() => setActiveModal({type:MODAL_TYPES.warningBeforeHomeworkSubmission})}>Submit</Button>
+        </HeaderBar>
+      )}
 
 			<HomeworkEditor
-        isReadOnly={false}
+        isReadOnly={isAfterDueDate}
         userId={activeUser.id}
         summary={assignment.summary}
         title={assignment.title}
-        assignmentConfig={assignment.toolAssignmentData.plannerConfig}
+        assignmentConfig={assignmentConfig}
         toolHomeworkData={toolHomeworkData}
         triggerAutoSave={autoSave}
         updateToolHomeworkData={handleHomeworkDataChange}
