@@ -19,7 +19,7 @@ export const SECTION_TYPE = {
 export const EMPTY_INFO = {
   canAddTab: true,
   studentAccessLevel: ACCESS_LEVELS.readonly,
-  dueDate: "",
+  dueDate: 0,
   minWordsCount: 50,
   minChecklistItems: 3,
   maxScore: 100,

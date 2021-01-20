@@ -28,16 +28,19 @@ export const Config = ({ useAutoScore }) => {
       <Form>
         <Row>
           <Form.Group as={Col}>
-            <Form.Label>Due Date</Form.Label>
+            <Form.Label>Maximum score for the assignment</Form.Label>
             <Form.Control
-              type="date"
-              value={plannerInfo.dueDate || ""}
+              disabled={!useAutoScore}
+              type="number"
+              value={plannerInfo.maxScore}
               onChange={(event) =>
-                handlePlannerUpdate("dueDate", event.target.value)
+                handlePlannerUpdate(
+                  "maxScore",
+                  event.target.value ? parseInt(event.target.value) : ""
+                )
               }
             />
           </Form.Group>
-          <Col />
           <Form.Group as={Col}>
             <Form.Label>Student access level</Form.Label>
             <div>
@@ -86,20 +89,6 @@ export const Config = ({ useAutoScore }) => {
               onChange={(event) =>
                 handlePlannerUpdate(
                   "minChecklistItems",
-                  event.target.value ? parseInt(event.target.value) : ""
-                )
-              }
-            />
-          </Form.Group>
-          <Form.Group as={Col}>
-            <Form.Label>Maximum score for the assignment</Form.Label>
-            <Form.Control
-              disabled={!useAutoScore}
-              type="number"
-              value={plannerInfo.maxScore}
-              onChange={(event) =>
-                handlePlannerUpdate(
-                  "maxScore",
                   event.target.value ? parseInt(event.target.value) : ""
                 )
               }

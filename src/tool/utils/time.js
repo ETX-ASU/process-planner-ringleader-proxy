@@ -10,5 +10,9 @@ export const calculateTimeDiff = (now, date) => {
   const days = Math.floor(difference / DAY);
   const hours = Math.round((difference - days * DAY) / HOUR);
 
+  if (days === 0 && hours === 0) {
+    return "0h";
+  }
+
   return `${days}d ${hours}h${suffix}`;
 };

@@ -7,7 +7,12 @@ import { noop } from "../../tool/utils/core";
 
 
 function HomeworkViewer(props) {
-	const {homework, assignment} = props;
+  const {homework, assignment} = props;
+  
+  const assignmentConfig = {
+    ...assignment.toolAssignmentData.plannerConfig,
+    dueDate: assignment.lockOnDate ? assignment.lockOnDate * 1000 : 0,
+  };
 
 	return (
 		<Fragment>
@@ -23,7 +28,7 @@ function HomeworkViewer(props) {
           userId="-1"
           summary={assignment.summary}
           title={assignment.title}
-          assignmentConfig={assignment.toolAssignmentData.plannerConfig}
+          assignmentConfig={assignmentConfig}
           toolHomeworkData={homework.toolHomeworkData}
           updateToolHomeworkData={noop}
         />
