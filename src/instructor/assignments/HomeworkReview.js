@@ -4,7 +4,7 @@ import {HOMEWORK_PROGRESS} from "../../app/constants";
 import {Container, Row, Col} from 'react-bootstrap';
 import "../../student/homeworks/homeworks.scss";
 import GradingBar from "./gradingBar/GradingBar";
-import HomeworkEditor from "../../tool/HomeworkEditor";
+import HomeworkEditorReadOnly from "../../tool/HomeworkEditorReadOnly";
 import { noop } from "../../tool/utils/core";
 
 
@@ -70,12 +70,10 @@ function HomeworkReview(props) {
         }
 
         {isShowWork() &&
-          <HomeworkEditor
-            isReadOnly
+          <HomeworkEditorReadOnly
             userId={activeUser.id}
             toolHomeworkData={reviewedStudent.homework.toolHomeworkData}
             assignmentConfig={assignment.toolAssignmentData.plannerConfig}
-            updateToolHomeworkData={noop}
           />
         }
 
