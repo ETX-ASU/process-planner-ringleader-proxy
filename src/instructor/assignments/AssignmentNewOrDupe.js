@@ -14,8 +14,6 @@ import LoadingIndicator from "../../app/components/LoadingIndicator";
 import HeaderBar from "../../app/components/HeaderBar";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 
-import { AssignmentsList } from "../../tool/components/AssignmentsList/AssignmentsList";
-
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
@@ -229,7 +227,6 @@ function AssignmentNewOrDupe() {
         </Fragment>
         }
       </Container>
-      {assignments.length > 0 && <AssignmentsList list={assignments} />}
     </Fragment>
   )
 }
