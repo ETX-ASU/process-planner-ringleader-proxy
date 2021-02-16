@@ -27,6 +27,7 @@ const HomeworkEditor = ({
       ),
       files: toolHomeworkData.files || [],
       info: {
+        ...assignmentConfig,
         canAddTab:
           !isReadOnly &&
           assignmentConfig.studentAccessLevel !== ACCESS_LEVELS.readonly,
@@ -55,7 +56,9 @@ const HomeworkEditor = ({
       isLimitedEditing={isReadOnly}
     >
       <Meta mode={`Student :: ${isReadOnly ? "View" : "Create"} Homework`} />
-      <YourAccessLevel level={assignmentConfig.studentAccessLevel} />
+      {!isReadOnly && (
+        <YourAccessLevel level={assignmentConfig.studentAccessLevel} />
+      )}
       <ProcessPlannerContent data={initialData} />
     </ProcessPlannerProvider>
   );
