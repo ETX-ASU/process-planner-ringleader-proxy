@@ -1,24 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect/*, useState*/} from 'react';
 import './App.scss';
 import {API, graphqlOperation} from "aws-amplify";
 
 import {useDispatch, useSelector} from "react-redux";
 
 import { setActiveUiScreenMode, setSessionData, setAssignmentData } from "./store/appReducer";
-import {HOMEWORK_PROGRESS, ROLE_TYPES, UI_SCREEN_MODES} from "./constants";
+import {/* HOMEWORK_PROGRESS, */ROLE_TYPES, UI_SCREEN_MODES} from "./constants";
 import {Container, Row} from "react-bootstrap";
 import InstructorDashboard from "../instructor/InstructorDashboard";
 import StudentDashboard from "../student/StudentDashboard";
 import LoadingIndicator from "./components/LoadingIndicator";
 import {useLocation} from "react-router-dom";
-import {getAssignment, listAssignments} from "../graphql/queries";
-import {shuffle} from "./utils/shuffle";
+import {getAssignment /*, listAssignments*/} from "../graphql/queries";
+// import {shuffle} from "./utils/shuffle";
 import DevUtilityDashboard from "../developer/DevUtilityDashboard";
 
 import {createMockCourseMembers} from "../lmsConnection/MockRingLeader";
 import {fetchUsers, hasValidSession} from "../lmsConnection/RingLeader";
 import aws_exports from '../aws-exports';
-import SelectionDashboard from "../instructor/lmsLinkage/SelectionDashboard";
+// import SelectionDashboard from "../instructor/lmsLinkage/SelectionDashboard";
 import {reportError} from "../developer/DevUtils";
 import {updateAssignment} from "../graphql/mutations";
 
@@ -27,11 +27,11 @@ function App() {
 	const dispatch = useDispatch();
 	const activeUser = useSelector(state => state.app.activeUser);
   const assignmentId = useSelector(state => state.app.assignmentId);
-  const [isFetchingAssignments, setIsFetchingAssignments] = useState(true);
-  const [strandedAssignments, setStrandedAssignments] = useState(true);
+  // const [isFetchingAssignments, setIsFetchingAssignments] = useState(true);
+  // const [strandedAssignments, setStrandedAssignments] = useState(true);
   const params = new URLSearchParams(useLocation().search);
   const lineItemId = params.get('lineItemId');
-  const mode = params.get('mode');
+  // const mode = params.get('mode');
 
   useEffect(() => {
     console.log(`------------ initialize`);
@@ -55,6 +55,7 @@ function App() {
 
     // if (mode === 'selectAssignment') dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.assignmentSelectorTool));
     initializeSessionData(courseIdParam, assignmentIdParam, userIdParam, activeRoleParam, lineItemId);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 
@@ -75,6 +76,7 @@ function App() {
     } else {
       dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.viewAssignment));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [assignmentId, activeUser])
 
 

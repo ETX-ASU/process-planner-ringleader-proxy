@@ -102,6 +102,8 @@ function AssignmentEditor() {
             <p>Canceling will loose any changes you may have made to this assignment.</p>
           </ConfirmationModal>
         )
+      default:
+        return null;
     }
   }
 

@@ -1,4 +1,4 @@
-import {ACTIVITY_PROGRESS, HOMEWORK_PROGRESS, ROLE_TYPES} from "../app/constants";
+import {/*ACTIVITY_PROGRESS, HOMEWORK_PROGRESS,*/ ROLE_TYPES} from "../app/constants";
 
 
 const getAsyncSpecs = () => {
@@ -223,6 +223,7 @@ export const generateMockMembers = (total)=> {
   let studentId = 10;
 
   while(members.length <= total) {
+    // eslint-disable-next-line no-loop-func
     const memberSet = testNames.map((n,i) => {
       return {
         id: (studentId+i).toString(),

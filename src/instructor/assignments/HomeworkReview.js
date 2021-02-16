@@ -5,7 +5,6 @@ import {Container, Row, Col} from 'react-bootstrap';
 import "../../student/homeworks/homeworks.scss";
 import GradingBar from "./gradingBar/GradingBar";
 import HomeworkEditorReadOnly from "../../tool/HomeworkEditorReadOnly";
-import { noop } from "../../tool/utils/core";
 
 
 function HomeworkReview(props) {

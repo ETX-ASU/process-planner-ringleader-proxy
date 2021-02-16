@@ -50,6 +50,7 @@ function HomeworkListing(props) {
 
     const shown = sortedStudents.filter((s, i) => i >= (topStudentIndex) && i < topStudentIndex + studentsPerPage)
     setShownStudents(shown);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.students, pageCount, sortBy, curPageNum, isHideStudentIdentity, activeUiScreenMode])
 
 
