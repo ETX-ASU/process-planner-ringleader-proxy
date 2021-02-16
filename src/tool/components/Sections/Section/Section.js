@@ -20,7 +20,7 @@ export const Section = ({
   onChange,
   onDelete,
 }) => {
-  const { userType, deleteFile, getSectionFiles } = useProcessPlanner();
+  const { userType, deleteFile, getSectionFiles, plannerInfo } = useProcessPlanner();
 
   const handleFileRemove = useCallback(
     async (fileKey) => {
@@ -103,6 +103,7 @@ export const Section = ({
           value={section.text || ""}
           onChange={handleTextChange}
           canEdit={canEditContent}
+          minWordCount={plannerInfo.minWordsCount || 50}
         />
       )}
       {section.type === SECTION_TYPE.checklist && (
