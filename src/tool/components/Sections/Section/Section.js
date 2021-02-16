@@ -104,6 +104,7 @@ export const Section = ({
           onChange={handleTextChange}
           canEdit={canEditContent}
           minWordCount={plannerInfo.minWordsCount || 50}
+          userType={userType}
         />
       )}
       {section.type === SECTION_TYPE.checklist && (

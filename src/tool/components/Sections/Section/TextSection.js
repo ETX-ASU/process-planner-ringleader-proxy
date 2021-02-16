@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { calculateWordCount } from "../../../ToolUtils";
+import { USER_TYPE } from "../../../constants";
 import styles from "./Section.module.scss";
 
-export const TextSection = ({ canEdit, minWordCount, value, onChange }) => {
+export const TextSection = ({ canEdit, minWordCount, value, onChange, userType }) => {
   const [wordCount, setWordCount] = useState(0)
 
   const handleChange = useCallback((event) => {
@@ -17,12 +18,14 @@ export const TextSection = ({ canEdit, minWordCount, value, onChange }) => {
   return canEdit ? (
     <>
       <textarea value={value} onChange={handleChange} placeholder="Enter text here" />
-      <p className={styles.wordCount}>
-        <span>Words: {wordCount}</span>
-        {minWordCount ? (
-          <span>Required words: {minWordCount}</span>
-        ) : null}
-      </p>
+      {userType === USER_TYPE.student && (
+        <p className={styles.wordCount}>
+          <span>Words: {wordCount}</span>
+          {minWordCount ? (
+            <span>Required words: {minWordCount}</span>
+          ) : null}
+        </p>
+      )}
     </>
   ) : (
     <div className={styles.textSection}>{value}</div>
