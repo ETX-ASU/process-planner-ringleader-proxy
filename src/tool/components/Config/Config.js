@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Container, Col, Form, Row } from "react-bootstrap";
 import { useProcessPlanner } from "../../hooks/useProcessPlanner";
 import { ACCESS_LEVELS } from "../../constants";
-import { AccessLevelHelp } from "./AccessLevelHelp";
+import { AccessLevelHelp } from "../AccessLevel/AccessLevelHelp";
 
 export const Config = ({ useAutoScore }) => {
   const { plannerInfo, setPlannerInfo } = useProcessPlanner();

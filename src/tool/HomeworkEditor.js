@@ -5,6 +5,7 @@ import { ProcessPlannerContent } from "./components/ProcessPlanner/ProcessPlanne
 import { setTabsPermissions } from "./utils/permissions";
 import { ACCESS_LEVELS, USER_TYPE } from "./constants";
 import { Meta } from "./components/Meta/Meta";
+import { YourAccessLevel } from "./components/AccessLevel/YourAccessLevel";
 
 const HomeworkEditor = ({
   assignmentConfig,
@@ -54,6 +55,7 @@ const HomeworkEditor = ({
       isLimitedEditing={isReadOnly}
     >
       <Meta mode={`Student :: ${isReadOnly ? "View" : "Create"} Homework`} />
+      <YourAccessLevel level={assignmentConfig.studentAccessLevel} />
       <ProcessPlannerContent data={initialData} />
     </ProcessPlannerProvider>
   );
