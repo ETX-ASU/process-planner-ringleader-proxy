@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Container, Col, Form, Row } from "react-bootstrap";
 import { useProcessPlanner } from "../../hooks/useProcessPlanner";
 import { ACCESS_LEVELS } from "../../constants";
+import { AccessLevelHelp } from "./AccessLevelHelp";
 
 export const Config = ({ useAutoScore }) => {
   const { plannerInfo, setPlannerInfo } = useProcessPlanner();
@@ -42,7 +43,10 @@ export const Config = ({ useAutoScore }) => {
             />
           </Form.Group>
           <Form.Group as={Col}>
-            <Form.Label>Student access level</Form.Label>
+            <Form.Label>
+              Student access level
+              <AccessLevelHelp />
+            </Form.Label>
             <div>
               {Object.keys(ACCESS_LEVELS).map((level) => (
                 <Form.Check

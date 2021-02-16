@@ -167,6 +167,14 @@ button {
     border: none;
     background-color: var(--x-black) !important;
   }
+
+  &.close {
+    font-size: 1.5rem !important;
+
+    &:hover, &:focus {
+      background-color: transparent !important;
+    }
+  }
 }
 
 table.listing {

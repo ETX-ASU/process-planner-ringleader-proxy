@@ -1,0 +1,15 @@
+.button {
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.dialog {
+  > div {
+    background: transparent;
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    position: relative;
+  }
+}

@@ -71,3 +71,10 @@ export const duplicateAssignment = (assignment, activeUserId, courseId) => {
     lockOnDate: 0,
   });
 };
+
+export const calculateWordCount = (text) => {
+  return text
+    .replace(/[^A-Za-z\s]/g, '').split(" ")
+    .filter(token => token)
+    .length;
+}
