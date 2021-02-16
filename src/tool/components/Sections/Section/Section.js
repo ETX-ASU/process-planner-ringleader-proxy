@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "clsx";
-import { SECTION_TYPE, USER_TYPE } from "../../../constants";
+import { EMPTY_INFO, SECTION_TYPE, USER_TYPE } from "../../../constants";
 import { SectionType } from "../SectionType/SectionType";
 import { TextSection } from "./TextSection";
 import { ChecklistSection } from "./ChecklistSection";
@@ -103,7 +103,7 @@ export const Section = ({
           value={section.text || ""}
           onChange={handleTextChange}
           canEdit={canEditContent}
-          minWordCount={plannerInfo.minWordsCount || 50}
+          minWordCount={plannerInfo.minWordsCount || EMPTY_INFO.minWordsCount}
           userType={userType}
         />
       )}
@@ -112,6 +112,8 @@ export const Section = ({
           items={section.items || []}
           onChange={handleChecklistChange}
           canEdit={canEditContent}
+          minChecklistItems={plannerInfo.minChecklistItems || EMPTY_INFO.minChecklistItems}
+          userType={userType}
         />
       )}
       <div className={styles.sectionFiles}>

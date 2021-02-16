@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { ChecklistItem } from "./ChecklistItem";
 import { NewChecklistItem } from "./NewChecklistItem";
 import { checklistItem } from "../../../types/tabs";
+import { USER_TYPE } from "../../../constants";
 import styles from "./Section.module.scss";
 
-export const ChecklistSection = ({ canEdit, items, onChange }) => {
+export const ChecklistSection = ({ canEdit, items, onChange, minChecklistItems, userType }) => {
   const handleItemEdit = useCallback(
     (changedItem) => {
       const newItems = items.reduce((acc, item) => {
@@ -40,20 +41,27 @@ export const ChecklistSection = ({ canEdit, items, onChange }) => {
   );
 
   return (
-    <ul className={styles.checklist}>
-      {items.map((item, index) => {
-        return (
-          <ChecklistItem
-            key={index}
-            {...item}
-            canEdit={canEdit}
-            onChange={handleItemEdit}
-            onDelete={handleItemDelete}
-          />
-        );
-      })}
-      {canEdit && <NewChecklistItem onCreate={handleItemCreate} />}
-    </ul>
+    <>
+      <ul className={styles.checklist}>
+        {items.map((item, index) => {
+          return (
+            <ChecklistItem
+              key={index}
+              {...item}
+              canEdit={canEdit}
+              onChange={handleItemEdit}
+              onDelete={handleItemDelete}
+            />
+          );
+        })}
+        {canEdit && <NewChecklistItem onCreate={handleItemCreate} />}
+      </ul>
+      {userType === USER_TYPE.student && (
+        <p className={styles.wordCount}>
+          <span>Required at least {minChecklistItems} {minChecklistItems === 1 ? "item" : "items"}</span>
+        </p>
+      )}
+    </>
   );
 };
 
