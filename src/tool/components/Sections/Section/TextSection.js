@@ -18,7 +18,7 @@ export const TextSection = ({ canEdit, minWordCount, value, onChange, userType }
   return canEdit ? (
     <>
       <textarea value={value} onChange={handleChange} placeholder="Enter text here" />
-      {userType === USER_TYPE.student && (
+      {userType === USER_TYPE.student && canEdit && (
         <p className={styles.wordCount}>
           <span>Words: {wordCount}</span>
           {minWordCount ? (

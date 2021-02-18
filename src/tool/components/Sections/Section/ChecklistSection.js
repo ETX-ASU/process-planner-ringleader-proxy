@@ -59,7 +59,7 @@ export const ChecklistSection = ({ canEdit, items, onChange, minChecklistItems, 
         })}
         {canEdit && <NewChecklistItem onCreate={handleItemCreate} />}
       </ul>
-      {userType === USER_TYPE.student && (
+      {userType === USER_TYPE.student && canEdit && (
         <p className={styles.wordCount}>
           <span>Required at least {minChecklistItems} {minChecklistItems === 1 ? "item" : "items"}</span>
         </p>
