@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { EMPTY_TAB } from "../constants";
+import { EMPTY_TAB, SECTION_TYPE } from "../constants";
 
 export const getNewTabData = (ownerId) => ({
   ...EMPTY_TAB,
@@ -59,8 +59,31 @@ export const reorderTabs = (tabs, sourceId, destinationId) => {
   return resultTabs;
 };
 
-export const removeTabPermissions = (tabs) =>
-  tabs.map(({ permissions, ...otherProps }) => otherProps);
+export const removeTabPermissions = (tabs) => {
+  return tabs.map(({ permissions, ...tab }) => {
+    
+    const modifiedTab = {
+      ...tab,
+      content: {
+        ...tab.content,
+        sections: Array.isArray(tab.content.sections)
+          ? tab.content.sections.map(section => {
+            if (section.type === SECTION_TYPE.checklist && section.items.length > 0) {
+              return {
+                ...section,
+                items: section.items.map(({ createdByTeacher, ...item }) => ({ ...item }))
+              }
+            }
+
+            return section;
+          })
+          : tab.content.sections
+      }
+    };
+
+    return modifiedTab;
+  });
+}
 
 export default {
   createTab,

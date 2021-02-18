@@ -11,7 +11,10 @@ export const ChecklistSection = ({ canEdit, items, onChange, minChecklistItems, 
     (changedItem) => {
       const newItems = items.reduce((acc, item) => {
         if (item.id === changedItem.id) {
-          acc.push(changedItem);
+          acc.push({
+            ...item,
+            ...changedItem
+          });
         } else {
           acc.push(item);
         }
