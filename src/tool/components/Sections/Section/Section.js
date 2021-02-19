@@ -114,6 +114,7 @@ export const Section = ({
           canEdit={canEditContent}
           minChecklistItems={plannerInfo.minChecklistItems || EMPTY_INFO.minChecklistItems}
           userType={userType}
+          studentAccessLevel={plannerInfo.studentAccessLevel}
         />
       )}
       <div className={styles.sectionFiles}>

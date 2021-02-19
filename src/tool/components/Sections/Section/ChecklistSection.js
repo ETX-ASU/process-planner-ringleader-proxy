@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { ChecklistItem } from "./ChecklistItem";
 import { NewChecklistItem } from "./NewChecklistItem";
 import { checklistItem } from "../../../types/tabs";
-import { USER_TYPE } from "../../../constants";
+import { ACCESS_LEVELS, USER_TYPE } from "../../../constants";
 import styles from "./Section.module.scss";
 
-export const ChecklistSection = ({ canEdit, items, onChange, minChecklistItems, userType }) => {
+export const ChecklistSection = ({ canEdit, items, onChange, minChecklistItems, userType, studentAccessLevel }) => {
   const handleItemEdit = useCallback(
     (changedItem) => {
       const newItems = items.reduce((acc, item) => {
@@ -43,6 +43,13 @@ export const ChecklistSection = ({ canEdit, items, onChange, minChecklistItems, 
     [items, onChange]
   );
 
+  const hasItemsCreatedByTheTeacher = items.filter(({ createdByTeacher }) => createdByTeacher).length > 0;
+
+  const canAddNewItem = canEdit
+    && (
+      (!hasItemsCreatedByTheTeacher) || (hasItemsCreatedByTheTeacher && studentAccessLevel !== ACCESS_LEVELS.readonly)
+    )
+
   return (
     <>
       <ul className={styles.checklist}>
@@ -57,7 +64,7 @@ export const ChecklistSection = ({ canEdit, items, onChange, minChecklistItems, 
             />
           );
         })}
-        {canEdit && <NewChecklistItem onCreate={handleItemCreate} />}
+        {canAddNewItem && <NewChecklistItem onCreate={handleItemCreate} />}
       </ul>
       {userType === USER_TYPE.student && canEdit && (
         <p className={styles.wordCount}>
