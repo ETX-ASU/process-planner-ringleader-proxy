@@ -111,7 +111,7 @@ function AssignmentCreator() {
 	return (
     <Fragment>
       {activeModal && renderModal()}
-      <HeaderBar title='Create New Assignment - Proxy'>
+      <HeaderBar title='Create New Assignment'>
         <Button onClick={() => setActiveModal({type: MODAL_TYPES.cancelNewAssignmentEditsWarning})} className='mr-2'>Cancel</Button>
         <Button onClick={handleSubmitBtn}>Create</Button>
       </HeaderBar>
