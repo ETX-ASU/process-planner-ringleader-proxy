@@ -189,8 +189,8 @@ function AssignmentCreator() {
             placement="bottom"
             overlay={
               <Tooltip id="submit-button-tooltip">
-                Please enter the assignment title and add some data to the
-                planner.
+                Please enter the assignment title and change the default tab
+                name.
               </Tooltip>
             }
           >
