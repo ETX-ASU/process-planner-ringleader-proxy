@@ -2,9 +2,9 @@ import React from "react";
 import {Modal, Button} from "react-bootstrap";
 
 
-function ConfirmationModal(props) {
+function ConfirmationModal({ isStatic, ...props }) {
   return(
-    <Modal show={true} onHide={props.onHide}>
+    <Modal show={true} onHide={props.onHide} backdrop={isStatic ? "static" : true}>
       <Modal.Header>
         <Modal.Title>{props.title}</Modal.Title>
       </Modal.Header>

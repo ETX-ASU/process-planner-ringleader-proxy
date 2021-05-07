@@ -118,7 +118,7 @@ function AssignmentNewOrDupe() {
     switch (activeModal.type) {
       case MODAL_TYPES.confirmAssignmentDuped:
         return (
-          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Assignment Saved'}
+          <ConfirmationModal isStatic onHide={() => setActiveModal(null)} title={'Assignment Saved'}
             buttons={[{ name: 'Edit Duplicated Assignment', onClick: () => closeModalAndEditDuped(activeModal.data[1]) }]}>
             { (activeModal.data[0].lineItemId)
               ? <p>A new assignment called Copy of {activeModal.data[0]} has been saved! It is now accessible in your LMS.</p>
@@ -128,7 +128,7 @@ function AssignmentNewOrDupe() {
         );
       case MODAL_TYPES.confirmAssignmentRecovered:
         return (
-          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Assignment Saved'}
+          <ConfirmationModal isStatic onHide={() => setActiveModal(null)} title={'Assignment Saved'}
             buttons={[{ name: 'Edit Recovered Assignment', onClick: () => closeModalAndEditDuped(activeModal.data[1]) }]}>
             <p>Your assignment "{activeModal.data[0]}" has been recovered. You will now be taken to a screen so you can edit and customize this recovered assignment.</p>
           </ConfirmationModal>

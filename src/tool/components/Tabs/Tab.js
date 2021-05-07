@@ -100,6 +100,7 @@ export const Tab = ({
     <>
       {showConfirmation && (
         <ConfirmationModal
+          isStatic
           onHide={handleHideConfirmation}
           title={"Delete Tab"}
           buttons={[

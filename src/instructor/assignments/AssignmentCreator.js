@@ -86,7 +86,7 @@ function AssignmentCreator() {
     switch (activeModal.type) {
       case MODAL_TYPES.cancelNewAssignmentEditsWarning:
         return (
-          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Cancel Creation Warning'} buttons={[
+          <ConfirmationModal isStatic onHide={() => setActiveModal(null)} title={'Cancel Creation Warning'} buttons={[
             {name: 'Cancel', onClick: handleReturnToCreateOrDupe},
             {name: 'Continue Creating', onClick: () => setActiveModal(null)},
           ]}>
@@ -96,7 +96,7 @@ function AssignmentCreator() {
         );
       case MODAL_TYPES.confirmAssignmentSaved:
         return (
-          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Assignment Saved'} buttons={[
+          <ConfirmationModal isStatic onHide={() => setActiveModal(null)} title={'Assignment Saved'} buttons={[
             {name: 'Continue', onClick: handleReturnToCreateOrDupe},
           ]}>
             <p>Assignment has been saved! In order to access it, use this assignmentId: ${activeModal.id}</p>
