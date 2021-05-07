@@ -153,7 +153,13 @@ export const Tab = ({
               delay={2000}
               overlay={<Tooltip id={`tab-${id}`}>{title}</Tooltip>}
             >
-              <span>{title}</span>
+              <span
+                onDoubleClick={
+                  permissions.canEditTab ? handleEditToggle : undefined
+                }
+              >
+                {title}
+              </span>
             </OverlayTrigger>
             {permissions.canEditTab && (
               <FontAwesomeIcon
