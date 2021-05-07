@@ -23,6 +23,12 @@ export const Config = () => {
     return null;
   }
 
+  const levelLabels = {
+    full: "Full",
+    partial: "Parial",
+    readonly: "Read only",
+  };
+
   return (
     <Container className="mt-2 ml-2 mr-2 mb-4">
       <Form>
@@ -53,7 +59,7 @@ export const Config = () => {
                   type="radio"
                   id={`student-edit-level-${level}`}
                   name="student-edit-level"
-                  label={level}
+                  label={levelLabels[level]}
                   checked={plannerInfo.studentAccessLevel === level}
                   value={level}
                   onChange={(event) =>
