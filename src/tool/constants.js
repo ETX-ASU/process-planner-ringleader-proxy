@@ -35,7 +35,7 @@ export const EMPTY_TAB = {
   },
   title: "New Tab",
   content: {
-    paneSize: 50,
+    paneSize: 60,
     description: "",
     sections: [],
   },
