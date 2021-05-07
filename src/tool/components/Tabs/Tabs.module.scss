@@ -6,6 +6,13 @@
   flex-direction: row;
   justify-content: flex-start;
   overflow: hidden;
+
+  .list {
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 30px);
+    overflow: hidden;
+  }
 }
 
 .tabItem {
@@ -20,7 +27,8 @@
   flex-direction: row;
   font-weight: 300;
   margin-bottom: -1px;
-  padding: 0 1rem;
+  overflow: hidden;
+  padding: 0 5px;
   position: relative;
   text-decoration: none;
 
@@ -47,8 +55,16 @@
   }
 
   span {
-    padding: 0.5rem 1rem 0.5rem 0;
+    padding: 0.5rem 5px;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &.tooLong {
+    span {
+      width: calc(100% - 30px);
+    }
   }
 
   svg {
@@ -88,6 +104,12 @@
   display: flex;
   justify-content: center;
   margin-left: 10px;
+  user-select: none;
+
+  &.disabled {
+    opacity: 0.65;
+    cursor: default;
+  }
 }
 
 .content {

@@ -1,5 +1,12 @@
-import React, { cloneElement, Children, useMemo, Fragment } from "react";
+import React, {
+  cloneElement,
+  Children,
+  useMemo,
+  Fragment,
+  useEffect,
+} from "react";
 import classNames from "clsx";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useProcessPlanner } from "../../hooks/useProcessPlanner";
@@ -70,17 +77,41 @@ export const Tabs = ({
     reorderTabs,
   ]);
 
+  useEffect(() => {}, []);
+
   const tabsClassNames = classNames(styles.tabs, tabsClassName);
   const contentClassNames = classNames(styles.content, contentClassName);
+
+  const tabLimit = 10;
+  const reachedLimit = childrenArray.length === tabLimit;
 
   return (
     <div className={styles.wrapper}>
       <div className={tabsClassNames}>
-        {tabItems}
+        <div className={styles.list}>{tabItems}</div>
         {canAddNewTab && (
-          <span className={styles.addTabButton} onClick={createTab}>
-            <FontAwesomeIcon icon={faPlus} />
-          </span>
+          <Fragment>
+            {reachedLimit ? (
+              <OverlayTrigger
+                placement="bottom"
+                overlay={
+                  <Tooltip id="add-new-tab-tooltip">
+                    Cannot add more than {tabLimit} tabs.
+                  </Tooltip>
+                }
+              >
+                <span
+                  className={classNames(styles.addTabButton, styles.disabled)}
+                >
+                  <FontAwesomeIcon icon={faPlus} />
+                </span>
+              </OverlayTrigger>
+            ) : (
+              <span className={styles.addTabButton} onClick={createTab}>
+                <FontAwesomeIcon icon={faPlus} />
+              </span>
+            )}
+          </Fragment>
         )}
       </div>
       <div className={contentClassNames}>

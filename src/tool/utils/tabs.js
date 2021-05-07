@@ -7,7 +7,12 @@ export const getNewTabData = (ownerId) => ({
   id: uuid(),
 });
 
-export const createTab = (tabs, ownerId) => [...tabs, getNewTabData(ownerId)];
+export const createTab = (tabs, ownerId) => {
+  const newTabData = getNewTabData(ownerId);
+  newTabData.title = `${newTabData.title} ${tabs.length}`;
+
+  return [...tabs, newTabData];
+};
 
 export const changeTabTitle = (tabs, index, newTitle) => {
   if (index > tabs.length) {
@@ -61,29 +66,33 @@ export const reorderTabs = (tabs, sourceId, destinationId) => {
 
 export const removeTabPermissions = (tabs) => {
   return tabs.map(({ permissions, ...tab }) => {
-    
     const modifiedTab = {
       ...tab,
       content: {
         ...tab.content,
         sections: Array.isArray(tab.content.sections)
-          ? tab.content.sections.map(section => {
-            if (section.type === SECTION_TYPE.checklist && section.items.length > 0) {
-              return {
-                ...section,
-                items: section.items.map(({ createdByTeacher, ...item }) => ({ ...item }))
+          ? tab.content.sections.map((section) => {
+              if (
+                section.type === SECTION_TYPE.checklist &&
+                section.items.length > 0
+              ) {
+                return {
+                  ...section,
+                  items: section.items.map(({ createdByTeacher, ...item }) => ({
+                    ...item,
+                  })),
+                };
               }
-            }
 
-            return section;
-          })
-          : tab.content.sections
-      }
+              return section;
+            })
+          : tab.content.sections,
+      },
     };
 
     return modifiedTab;
   });
-}
+};
 
 export default {
   createTab,
