@@ -5,13 +5,12 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  overflow: hidden;
 
   .list {
+    align-items: flex-end;
     display: flex;
     flex-direction: row;
-    width: calc(100% - 30px);
-    overflow: hidden;
+    width: calc(100% - 40px);
   }
 }
 
@@ -89,6 +88,16 @@
   &.active {
     background-color: $tab-background-color;
     border-color: $tab-border-color $tab-border-color #fff;
+    padding-top: 3px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      border-bottom: 1px solid #fff;
+    }
   }
 }
 
