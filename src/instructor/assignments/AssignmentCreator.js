@@ -106,6 +106,11 @@ function AssignmentCreator() {
     dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.returnToLmsScreen));
   }
 
+  function handleCancelCreatingAssignment() {
+    setActiveModal(null);
+    dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.createOrDupeAssignment));
+  }
+
   function renderModal() {
     switch (activeModal.type) {
       case MODAL_TYPES.cancelNewAssignmentEditsWarning:
@@ -115,7 +120,7 @@ function AssignmentCreator() {
             onHide={() => setActiveModal(null)}
             title={"Cancel Creation Warning"}
             buttons={[
-              { name: "Cancel", onClick: handleReturnToCreateOrDupe },
+              { name: "Cancel", onClick: handleCancelCreatingAssignment },
               {
                 name: "Continue Creating",
                 onClick: () => setActiveModal(null),
