@@ -21,6 +21,7 @@ import HeaderBar from "../../app/components/HeaderBar";
 import ToggleSwitch from "../../app/components/ToggleSwitch";
 
 import ProcessPlannerCreator from "../../tool/ProcessPlannerCreator";
+import { FullscreenOverlay } from "../../tool/components/FullscreenOverlay/FullscreenOverlay";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 import { reportError } from "../../developer/DevUtils";
 import {
@@ -54,9 +55,21 @@ function AssignmentCreator() {
   const courseId = useSelector((state) => state.app.courseId);
   const [formData, setFormData] = useState(emptyAssignment);
   const [activeModal, setActiveModal] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const canCreateAssignment = useMemo(() => {
+    const plannerData = formData.toolAssignmentData.plannerData;
+
+    return (
+      formData.title !== "" &&
+      (plannerData.length > 1 || plannerData[0].title !== "New Tab")
+    );
+  }, [formData.title, formData.toolAssignmentData.plannerData]);
 
   async function handleSubmitBtn() {
-    if (!formData.title) return;
+    if (!canCreateAssignment) return;
+
+    setIsSubmitting(true);
 
     const assignmentId = uuid();
     const inputData = Object.assign({}, formData, {
@@ -87,6 +100,7 @@ function AssignmentCreator() {
         `We're sorry. There was a problem saving your new assignment.`
       );
     }
+    setIsSubmitting(false);
   }
 
   function toggleUseAutoScore(e) {
@@ -102,6 +116,7 @@ function AssignmentCreator() {
   }
 
   function handleReturnToCreateOrDupe() {
+    setIsSubmitting(true);
     setActiveModal(null);
     dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.returnToLmsScreen));
   }
@@ -152,15 +167,6 @@ function AssignmentCreator() {
       }
     }
   }
-
-  const canCreateAssignment = useMemo(() => {
-    const plannerData = formData.toolAssignmentData.plannerData;
-
-    return (
-      formData.title !== "" &&
-      (plannerData.length > 1 || plannerData[0].title !== "New Tab")
-    );
-  }, [formData.title, formData.toolAssignmentData.plannerData]);
 
   return (
     <Fragment>
@@ -277,6 +283,8 @@ function AssignmentCreator() {
           )}
         </Container>
       </form>
+
+      {isSubmitting && <FullscreenOverlay />}
 
       {/* The assignment data collected here is specific to the tool, while the above assignment data is used in every tool */}
       <ProcessPlannerCreator
