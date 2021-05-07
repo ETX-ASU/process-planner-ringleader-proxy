@@ -19,7 +19,7 @@ type PlannerSection {
 
 type PlannerContent {
   description: String
-  paneSize: Int
+  paneSize: Float
   sections: [PlannerSection]
 }
 

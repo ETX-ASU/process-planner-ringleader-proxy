@@ -195,7 +195,7 @@ function AssignmentViewer(props) {
     switch (activeModal.type) {
       case MODAL_TYPES.showBatchSubmitOptions:
         return (
-          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Batch Submit'} buttons={[
+          <ConfirmationModal isStatic onHide={() => setActiveModal(null)} title={'Batch Submit'} buttons={[
             {name: 'Cancel', onClick: () => setActiveModal(null)},
             {name: 'Submit', onClick: (e) => handleBatchSubmit(e)},
           ]}>
@@ -216,7 +216,7 @@ function AssignmentViewer(props) {
 
       case MODAL_TYPES.showWaitingForGrades:
         return (
-          <ConfirmationModal onHide={() => setActiveModal(null)} title={'Batch Submit... processing'} buttons={[]}>
+          <ConfirmationModal isStatic onHide={() => setActiveModal(null)} title={'Batch Submit... processing'} buttons={[]}>
             <p>Processing Grades Submission.</p>
               <div className='ml-4'>
                 <LoadingIndicator loadingMsg={'BATCH SUBMITTING GRADES...'} />

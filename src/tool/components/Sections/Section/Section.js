@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "clsx";
+import { v4 as uuid } from "uuid";
 import { EMPTY_INFO, SECTION_TYPE, USER_TYPE } from "../../../constants";
 import { SectionType } from "../SectionType/SectionType";
 import { TextSection } from "./TextSection";
@@ -20,7 +21,12 @@ export const Section = ({
   onChange,
   onDelete,
 }) => {
-  const { userType, deleteFile, getSectionFiles, plannerInfo } = useProcessPlanner();
+  const {
+    userType,
+    deleteFile,
+    getSectionFiles,
+    plannerInfo,
+  } = useProcessPlanner();
 
   const handleFileRemove = useCallback(
     async (fileKey) => {
@@ -32,10 +38,25 @@ export const Section = ({
 
   const handleTypeChange = useCallback(
     (type) => {
-      onChange(section.id, {
-        ...section,
-        type,
-      });
+      const newSection = { ...section, type };
+
+      if (section.type === SECTION_TYPE.text && Boolean(section.text)) {
+        newSection.items = section.text.split("\n").map((label) => ({
+          id: uuid(),
+          done: false,
+          label,
+        }));
+        section.text = "";
+      } else if (
+        section.type === SECTION_TYPE.checklist &&
+        section.items &&
+        section.items.length > 0
+      ) {
+        newSection.text = section.items.map((item) => item.label).join("\n");
+        newSection.items = [];
+      }
+
+      onChange(section.id, newSection);
     },
     [onChange, section]
   );
@@ -76,12 +97,7 @@ export const Section = ({
 
   const canEditFiles = canEditContent && userType === USER_TYPE.student;
 
-  const isReadOnlySection =
-    !canEditStructure ||
-    (section.type === SECTION_TYPE.text && Boolean(section.text)) ||
-    (section.type === SECTION_TYPE.checklist &&
-      section.items &&
-      section.items.length > 0);
+  const isReadOnlySection = !canEditStructure;
 
   return (
     <div className={classNames(styles.section, styles[section.type])}>
@@ -112,7 +128,9 @@ export const Section = ({
           items={section.items || []}
           onChange={handleChecklistChange}
           canEdit={canEditContent}
-          minChecklistItems={plannerInfo.minChecklistItems || EMPTY_INFO.minChecklistItems}
+          minChecklistItems={
+            plannerInfo.minChecklistItems || EMPTY_INFO.minChecklistItems
+          }
           userType={userType}
           studentAccessLevel={plannerInfo.studentAccessLevel}
         />

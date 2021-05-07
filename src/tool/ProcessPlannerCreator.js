@@ -33,7 +33,7 @@ const ProcessPlannerCreator = ({
       forceFullAccess
     >
       <Meta mode="Instructor :: Create Assignment" />
-      <Config useAutoScore={isUseAutoScore} />
+      <Config />
       <ProcessPlannerContent data={initialData} />
     </ProcessPlannerProvider>
   );

@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { calculateTimeDiff } from "../../utils/time";
 import { tabInfoProps } from "../../types/info";
 import styles from "./Info.module.scss";
 
@@ -39,18 +38,18 @@ export const Info = ({ title, progress, dueDate, description }) => {
                     className={styles.progressBar}
                     style={{ width: `${progress * 100}%` }}
                   />
+                  <span>{progress * 100}%</span>
                 </div>
               </div>
-              <div className={styles.metaSection}>
-                {dueDate && (
-                  <>
-                    <h3>Due In</h3>
-                    <p>{calculateTimeDiff(Date.now(), dueDate)}</p>
-                  </>
-                )}
-              </div>
+              <div className={styles.metaSection}></div>
             </div>
-            <div className={styles.description}>{description}</div>
+            <div className={styles.description}>
+              <h3>Assignment summary:</h3>
+              <p>
+                {description ||
+                  "The instructor didn't provide any additional information"}
+              </p>
+            </div>
           </div>
         </div>
       )}

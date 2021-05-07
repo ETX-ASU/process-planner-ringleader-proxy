@@ -44,6 +44,7 @@ export const SectionTitle = ({ id, title, canEdit, onChange, onDelete }) => {
     <>
       {showConfirmation && (
         <ConfirmationModal
+          isStatic
           onHide={handleHideConfirmation}
           title={"Delete Section"}
           buttons={[
