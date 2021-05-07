@@ -150,7 +150,7 @@ export const Tab = ({
           <>
             <OverlayTrigger
               placement="top"
-              delay={2000}
+              delay={1000}
               overlay={<Tooltip id={`tab-${id}`}>{title}</Tooltip>}
             >
               <span
