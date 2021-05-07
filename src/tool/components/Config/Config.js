@@ -1,11 +1,10 @@
 import React, { useCallback } from "react";
-import PropTypes from "prop-types";
 import { Container, Col, Form, Row } from "react-bootstrap";
 import { useProcessPlanner } from "../../hooks/useProcessPlanner";
 import { ACCESS_LEVELS } from "../../constants";
 import { AccessLevelHelp } from "../AccessLevel/AccessLevelHelp";
 
-export const Config = ({ useAutoScore }) => {
+export const Config = () => {
   const { plannerInfo, setPlannerInfo } = useProcessPlanner();
 
   const handlePlannerUpdate = useCallback(
@@ -31,7 +30,6 @@ export const Config = ({ useAutoScore }) => {
           <Form.Group as={Col}>
             <Form.Label>Maximum score for the assignment</Form.Label>
             <Form.Control
-              disabled={!useAutoScore}
               type="number"
               value={plannerInfo.maxScore}
               onChange={(event) =>
@@ -73,7 +71,6 @@ export const Config = ({ useAutoScore }) => {
           <Form.Group as={Col}>
             <Form.Label>Required minimum word count in text section</Form.Label>
             <Form.Control
-              disabled={!useAutoScore}
               type="number"
               value={plannerInfo.minWordsCount}
               onChange={(event) =>
@@ -87,7 +84,6 @@ export const Config = ({ useAutoScore }) => {
           <Form.Group as={Col}>
             <Form.Label>Required minimum items in checklist section</Form.Label>
             <Form.Control
-              disabled={!useAutoScore}
               type="number"
               value={plannerInfo.minChecklistItems}
               onChange={(event) =>
@@ -102,8 +98,4 @@ export const Config = ({ useAutoScore }) => {
       </Form>
     </Container>
   );
-};
-
-Config.propTypes = {
-  useAutoScore: PropTypes.bool,
 };
