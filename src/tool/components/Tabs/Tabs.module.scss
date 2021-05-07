@@ -5,7 +5,13 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  overflow: hidden;
+
+  .list {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 40px);
+  }
 }
 
 .tabItem {
@@ -20,7 +26,8 @@
   flex-direction: row;
   font-weight: 300;
   margin-bottom: -1px;
-  padding: 0 1rem;
+  overflow: hidden;
+  padding: 0 5px;
   position: relative;
   text-decoration: none;
 
@@ -47,8 +54,17 @@
   }
 
   span {
-    padding: 0.5rem 1rem 0.5rem 0;
+    padding: 0.5rem 5px;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  &.tooLong {
+    span {
+      width: calc(100% - 30px);
+    }
   }
 
   svg {
@@ -73,6 +89,16 @@
   &.active {
     background-color: $tab-background-color;
     border-color: $tab-border-color $tab-border-color #fff;
+    padding-top: 3px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      border-bottom: 1px solid #fff;
+    }
   }
 }
 
@@ -88,6 +114,12 @@
   display: flex;
   justify-content: center;
   margin-left: 10px;
+  user-select: none;
+
+  &.disabled {
+    opacity: 0.65;
+    cursor: default;
+  }
 }
 
 .content {

@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "clsx";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { tabPermissionsProps } from "../../types/tabs";
@@ -84,6 +85,8 @@ export const Tab = ({
   const handleDrop = useCallback(
     (event) => {
       event.stopPropagation();
+      event.preventDefault();
+
       const draggedId = event.dataTransfer.getData("text/plain");
       setIsDragOver(false);
       if (draggedId !== id) {
@@ -100,6 +103,7 @@ export const Tab = ({
     <>
       {showConfirmation && (
         <ConfirmationModal
+          isStatic
           onHide={handleHideConfirmation}
           title={"Delete Tab"}
           buttons={[
@@ -144,7 +148,19 @@ export const Tab = ({
           />
         ) : (
           <>
-            <span>{title}</span>
+            <OverlayTrigger
+              placement="top"
+              delay={1000}
+              overlay={<Tooltip id={`tab-${id}`}>{title}</Tooltip>}
+            >
+              <span
+                onDoubleClick={
+                  permissions.canEditTab ? handleEditToggle : undefined
+                }
+              >
+                {title}
+              </span>
+            </OverlayTrigger>
             {permissions.canEditTab && (
               <FontAwesomeIcon
                 icon={faPencilAlt}
