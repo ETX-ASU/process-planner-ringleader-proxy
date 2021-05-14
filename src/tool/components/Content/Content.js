@@ -56,10 +56,10 @@ export const Content = ({
     [changeTabSection, tabIndex]
   );
 
-  const handleAddSectionClick = useCallback(() => addTabSection(tabIndex), [
-    addTabSection,
-    tabIndex,
-  ]);
+  const handleAddSectionClick = useCallback(
+    () => addTabSection(tabIndex),
+    [addTabSection, tabIndex]
+  );
 
   const handleDeleteSectionClick = useCallback(
     (id) => deleteTabSection(tabIndex, id),
@@ -103,7 +103,7 @@ export const Content = ({
     gutterSize: 20,
     gutter,
     minSize: 300,
-    sizes: [content.paneSize, 100 - content.paneSize],
+    sizes: [100 - content.paneSize, content.paneSize],
     onDragEnd: handleDragEnd,
   };
 
@@ -120,13 +120,13 @@ export const Content = ({
       </div>
       {canEditStructure ? (
         <Split {...splitProps}>
-          {renderSections()}
           {renderDescription()}
+          {renderSections()}
         </Split>
       ) : (
         <div className={classNames(styles.split, styles.readOnly)}>
-          {renderSections()}
           {renderDescription()}
+          {renderSections()}
         </div>
       )}
     </div>
