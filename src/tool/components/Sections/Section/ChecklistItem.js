@@ -79,7 +79,7 @@ export const ChecklistItem = ({
           <span>{label}</span>
         )}
       </label>
-      {canEdit && createdByTeacher !== true && (
+      {canEdit && (
         <div className={styles.actions}>
           <FontAwesomeIcon
             icon={faPencilAlt}

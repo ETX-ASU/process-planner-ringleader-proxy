@@ -3,17 +3,24 @@ import PropTypes from "prop-types";
 import { ChecklistItem } from "./ChecklistItem";
 import { NewChecklistItem } from "./NewChecklistItem";
 import { checklistItem } from "../../../types/tabs";
-import { ACCESS_LEVELS, USER_TYPE } from "../../../constants";
+import { USER_TYPE } from "../../../constants";
 import styles from "./Section.module.scss";
 
-export const ChecklistSection = ({ canEdit, items, onChange, minChecklistItems, userType, studentAccessLevel }) => {
+export const ChecklistSection = ({
+  canEdit,
+  items,
+  onChange,
+  minChecklistItems,
+  userType,
+  studentAccessLevel,
+}) => {
   const handleItemEdit = useCallback(
     (changedItem) => {
       const newItems = items.reduce((acc, item) => {
         if (item.id === changedItem.id) {
           acc.push({
             ...item,
-            ...changedItem
+            ...changedItem,
           });
         } else {
           acc.push(item);
@@ -43,13 +50,6 @@ export const ChecklistSection = ({ canEdit, items, onChange, minChecklistItems, 
     [items, onChange]
   );
 
-  const hasItemsCreatedByTheTeacher = items.filter(({ createdByTeacher }) => createdByTeacher).length > 0;
-
-  const canAddNewItem = canEdit
-    && (
-      (!hasItemsCreatedByTheTeacher) || (hasItemsCreatedByTheTeacher && studentAccessLevel !== ACCESS_LEVELS.readonly)
-    )
-
   return (
     <>
       <ul className={styles.checklist}>
@@ -64,11 +64,14 @@ export const ChecklistSection = ({ canEdit, items, onChange, minChecklistItems, 
             />
           );
         })}
-        {canAddNewItem && <NewChecklistItem onCreate={handleItemCreate} />}
+        {canEdit && <NewChecklistItem onCreate={handleItemCreate} />}
       </ul>
       {userType === USER_TYPE.student && canEdit && (
         <p className={styles.wordCount}>
-          <span>Required at least {minChecklistItems} {minChecklistItems === 1 ? "item" : "items"}</span>
+          <span>
+            Required at least {minChecklistItems}{" "}
+            {minChecklistItems === 1 ? "item" : "items"}
+          </span>
         </p>
       )}
     </>
