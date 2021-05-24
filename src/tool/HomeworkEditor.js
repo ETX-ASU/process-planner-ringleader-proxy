@@ -57,7 +57,7 @@ const HomeworkEditor = ({
     >
       <Meta mode={`Student :: ${isReadOnly ? "View" : "Create"} Homework`} />
       {!isReadOnly && (
-        <YourAccessLevel alevel={assignmentConfig.studentAccessLevel} />
+        <YourAccessLevel level={assignmentConfig.studentAccessLevel} />
       )}
       <ProcessPlannerContent data={initialData} />
     </ProcessPlannerProvider>
