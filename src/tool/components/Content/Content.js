@@ -66,8 +66,11 @@ export const Content = ({
     [deleteTabSection, tabIndex]
   );
 
-  const renderDescription = () => (
-    <div className={styles.description}>
+  const renderDescription = (w) => (
+    <div
+      className={styles.description}
+      style={{ width: w === undefined ? undefined : `${w}%`, flex: "initial" }}
+    >
       {canChangeDescription ? (
         <RichText
           html={content.description}
@@ -125,7 +128,7 @@ export const Content = ({
         </Split>
       ) : (
         <div className={classNames(styles.split, styles.readOnly)}>
-          {renderDescription()}
+          {renderDescription(100 - content.paneSize)}
           {renderSections()}
         </div>
       )}
