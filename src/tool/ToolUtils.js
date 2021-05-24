@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { EMPTY_HOMEWORK, HOMEWORK_PROGRESS } from "../app/constants";
+import { SECTION_TYPE } from "./constants";
 import { calculateProgress, calculateScorePercentage } from "./utils/progress";
 
 export const getHomeworkStatus = (gradeData, homework) => {
@@ -35,6 +36,43 @@ export const calcPercentCompleted = (assignment, homework) => {
   return Math.round(
     100 * calculateProgress(homework.toolHomeworkData.plannerData)
   );
+};
+
+export const getCompletionStatus = (homeworkData) => {
+  if (!homeworkData || !homeworkData.plannerConfig) {
+    return [false, ""];
+  }
+
+  const reqMinWords = homeworkData.plannerConfig.minWordsCount;
+  const reqMinItems = homeworkData.plannerConfig.minChecklistItems;
+  const data = homeworkData.plannerData;
+
+  let result = true;
+  let message = "";
+
+  data.forEach(({ content, title }) => {
+    (content.sections || []).forEach(({ type, ...section }) => {
+      if (
+        result &&
+        type === SECTION_TYPE.text &&
+        calculateWordCount(section.text) < reqMinWords
+      ) {
+        result = false;
+        message = `text sections on tab "${title}"`;
+      }
+
+      if (
+        result &&
+        type === SECTION_TYPE.checklist &&
+        section.items.length < reqMinItems
+      ) {
+        result = false;
+        message = `checklists on tab "${title}"`;
+      }
+    });
+  });
+
+  return [result, message];
 };
 
 export const calcAutoScore = (assignment, homework) => {
@@ -74,7 +112,7 @@ export const duplicateAssignment = (assignment, activeUserId, courseId) => {
 
 export const calculateWordCount = (text) => {
   return text
-    .replace(/[^A-Za-z\s]/g, '').split(" ")
-    .filter(token => token)
-    .length;
-}
+    .replace(/[^A-Za-z\s]/g, "")
+    .split(" ")
+    .filter((token) => token).length;
+};

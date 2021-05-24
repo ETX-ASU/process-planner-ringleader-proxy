@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,7 +7,7 @@ import {
   MODAL_TYPES,
   UI_SCREEN_MODES,
 } from "../../app/constants";
-import { Button } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { updateHomework as updateHomeworkMutation } from "../../graphql/mutations";
 import { API } from "aws-amplify";
 import { setActiveUiScreenMode } from "../../app/store/appReducer";
@@ -19,8 +19,13 @@ import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../../app/components/ConfirmationModal";
 import HomeworkEditor from "../../tool/HomeworkEditor";
 import { sendAutoGradeToLMS } from "../../lmsConnection/RingLeader";
-import { calcAutoScore, calcMaxScoreForAssignment } from "../../tool/ToolUtils";
+import {
+  calcAutoScore,
+  calcMaxScoreForAssignment,
+  getCompletionStatus,
+} from "../../tool/ToolUtils";
 import { FullscreenOverlay } from "../../tool/components/FullscreenOverlay/FullscreenOverlay";
+import styles from "./HomeworkEngager.module.scss";
 
 library.add(faCheck, faTimes);
 
@@ -35,6 +40,8 @@ function HomeworkEngager(props) {
     Object.assign({}, homework.toolHomeworkData)
   );
   const [activeModal, setActiveModal] = useState(null);
+  const [isSubmitEnabled, setSubmitEnabled] = useState(false);
+  const [submitHelp, setSubmitHelp] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const assignmentConfig = {
@@ -220,21 +227,48 @@ function HomeworkEngager(props) {
     }
   }
 
+  const handleSubmitButtonClick = useCallback(() => {
+    setActiveModal({ type: MODAL_TYPES.warningBeforeHomeworkSubmission });
+  }, []);
+
+  useEffect(() => {
+    const [canEnableSubmit, additionalMessage] =
+      getCompletionStatus(toolHomeworkData);
+
+    setSubmitEnabled(canEnableSubmit);
+    setSubmitHelp(additionalMessage);
+  }, [toolHomeworkData]);
+
   return (
     <Fragment>
       {activeModal && renderModal()}
       <HeaderBar title={assignment.title}>
         <Button onClick={handleSaveButtonClick}>Save</Button>
         &nbsp;&nbsp;
-        <Button
-          onClick={() =>
-            setActiveModal({
-              type: MODAL_TYPES.warningBeforeHomeworkSubmission,
-            })
-          }
-        >
-          Submit
-        </Button>
+        {isSubmitEnabled ? (
+          <Button onClick={handleSubmitButtonClick}>Submit</Button>
+        ) : (
+          <OverlayTrigger
+            placement="bottom"
+            overlay={
+              <Tooltip id="submit-button-tooltip">
+                You can't submit your work until you enter required number of
+                words / items on the checklists.
+                <br />
+                {submitHelp !== "" && (
+                  <>
+                    Please check&nbsp;
+                    {submitHelp}
+                  </>
+                )}
+              </Tooltip>
+            }
+          >
+            <Button className={styles.disabledButton} type="button">
+              Submit
+            </Button>
+          </OverlayTrigger>
+        )}
       </HeaderBar>
 
       {isSubmitting && <FullscreenOverlay />}

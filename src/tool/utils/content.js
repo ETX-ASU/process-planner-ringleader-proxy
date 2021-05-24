@@ -92,14 +92,15 @@ export const canUserModifySection = (
 };
 
 export const canAddSection = (userType, accessLevel) => {
-  if (
-    userType === USER_TYPE.instructor ||
-    accessLevel !== ACCESS_LEVELS.readonly
-  ) {
-    return true;
-  }
+  return true;
+  // if (
+  //   userType === USER_TYPE.instructor ||
+  //   accessLevel !== ACCESS_LEVELS.readonly
+  // ) {
+  //   return true;
+  // }
 
-  return false;
+  // return false;
 };
 
 export default {
