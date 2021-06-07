@@ -41,7 +41,6 @@ function HomeworkEngager(props) {
   );
   const [activeModal, setActiveModal] = useState(null);
   const [isSubmitEnabled, setSubmitEnabled] = useState(false);
-  const [submitHelp, setSubmitHelp] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const assignmentConfig = {
@@ -232,11 +231,9 @@ function HomeworkEngager(props) {
   }, []);
 
   useEffect(() => {
-    const [canEnableSubmit, additionalMessage] =
-      getCompletionStatus(toolHomeworkData);
+    const [canEnableSubmit] = getCompletionStatus(toolHomeworkData);
 
     setSubmitEnabled(canEnableSubmit);
-    setSubmitHelp(additionalMessage);
   }, [toolHomeworkData]);
 
   return (
@@ -252,15 +249,8 @@ function HomeworkEngager(props) {
             placement="bottom"
             overlay={
               <Tooltip id="submit-button-tooltip">
-                You can't submit your work until you enter required number of
-                words / items on the checklists.
-                <br />
-                {submitHelp !== "" && (
-                  <>
-                    Please check&nbsp;
-                    {submitHelp}
-                  </>
-                )}
+                One or more of your sections is incomplete. Please check if you
+                entered the required number of words or items in the checklists.
               </Tooltip>
             }
           >
