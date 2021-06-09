@@ -2,3 +2,11 @@
   margin-top: 20px;
   position: relative;
 }
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}

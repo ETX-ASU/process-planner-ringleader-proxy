@@ -44,7 +44,7 @@ const ProcessPlannerEditor = ({
     >
       <Meta mode="Instructor :: Edit Assignment" />
       <Config useAutoScore={isUseAutoScore} />
-      <ProcessPlannerContent data={initialData} />
+      <ProcessPlannerContent data={initialData} isTeacher />
     </ProcessPlannerProvider>
   );
 };

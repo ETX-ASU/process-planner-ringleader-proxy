@@ -34,7 +34,7 @@ const ProcessPlannerCreator = ({
     >
       <Meta mode="Instructor :: Create Assignment" />
       <Config />
-      <ProcessPlannerContent data={initialData} />
+      <ProcessPlannerContent data={initialData} isTeacher />
     </ProcessPlannerProvider>
   );
 };
