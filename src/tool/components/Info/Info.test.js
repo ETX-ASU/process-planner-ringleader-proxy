@@ -60,14 +60,8 @@ describe("<Info />", () => {
       expect(container.querySelector(".progressBar")).toHaveStyle("width: 40%");
     });
 
-    test("renders correct due date", () => {
-      expect(container.querySelector(".metaSection p").textContent).toBe(
-        "15d 14h"
-      );
-    });
-
     test("renders description", () => {
-      expect(container.querySelector(".description").textContent).toBe(
+      expect(container.querySelector(".description p").textContent).toBe(
         props.description
       );
     });

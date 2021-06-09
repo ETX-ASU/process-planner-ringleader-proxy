@@ -6,4 +6,5 @@ export const plannerProps = {
   plannerData: PropTypes.shape(tabDataProps),
   info: PropTypes.shape(tabInfoProps),
   activeTab: PropTypes.number,
+  isReadOnly: PropTypes.bool,
 };

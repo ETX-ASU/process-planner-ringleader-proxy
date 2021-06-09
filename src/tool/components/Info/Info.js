@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faQuestion, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { tabInfoProps } from "../../types/info";
 import styles from "./Info.module.scss";
 
@@ -19,7 +19,7 @@ export const Info = ({ title, progress, dueDate, description }) => {
   return (
     <>
       <div className={styles.infoButton} onClick={handleButtonClick}>
-        <FontAwesomeIcon icon={faQuestion} />
+        See assignment details
       </div>
       {isModalOpen && (
         <div className={styles.overlay} onClick={closeModal}>

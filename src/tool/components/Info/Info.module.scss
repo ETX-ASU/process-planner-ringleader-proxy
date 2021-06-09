@@ -2,18 +2,9 @@
 
 .infoButton {
   cursor: pointer;
-  position: absolute;
-  right: 0;
-  top: 6px;
-  align-items: center;
-  background-color: $tab-inactive-background-color;
-  border: 1px solid $tab-border-color;
-  border-radius: 50%;
-  cursor: pointer;
-  height: 30px;
-  width: 30px;
-  display: flex;
-  justify-content: center;
+  margin-left: 20px;
+  margin-top: 10px;
+  text-decoration: underline;
 }
 
 .overlay {
