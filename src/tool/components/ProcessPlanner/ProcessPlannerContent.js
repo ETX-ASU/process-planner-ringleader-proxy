@@ -3,7 +3,7 @@ import { Tabs, Tab } from "../Tabs/Tabs";
 import { plannerProps } from "../../types/planner";
 import { Content } from "../Content/Content";
 import { useProcessPlanner } from "../../hooks/useProcessPlanner";
-import { calculateProgress } from "../../utils/progress";
+import { calculateScorePercentage } from "../../utils/progress";
 import { Info } from "../Info/Info";
 import { YourAccessLevel } from "../AccessLevel/YourAccessLevel";
 import styles from "./ProcessPlannerContent.module.scss";
@@ -25,7 +25,11 @@ export const ProcessPlannerContent = ({ data, isReadOnly, isTeacher }) => {
     data.files && setFiles(data.files);
   }, [data, setActiveTab, setPlannerData, setPlannerInfo, setFiles]);
 
-  const progress = calculateProgress(plannerData);
+  const progress = calculateScorePercentage(
+    plannerData,
+    plannerInfo?.minWordsCount || 50,
+    plannerInfo?.minChecklistItems || 3
+  );
 
   const canAddNewTab = plannerInfo !== null && plannerInfo.canAddTab === true;
   const canShowInfo = plannerInfo !== null && plannerInfo.title;
