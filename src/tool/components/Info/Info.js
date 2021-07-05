@@ -16,6 +16,13 @@ export const Info = ({ title, progress, dueDate, description }) => {
 
   const handleModalClick = useCallback((event) => event.stopPropagation(), []);
 
+  const plainProgress = progress * 100;
+  const fixedProgress = plainProgress.toFixed(2);
+  const progressValue =
+    // eslint-disable-next-line eqeqeq
+    plainProgress == fixedProgress ? plainProgress : fixedProgress;
+  const progressPercentage = progressValue + "%";
+
   return (
     <>
       <div className={styles.infoButton} onClick={handleButtonClick}>
@@ -36,9 +43,9 @@ export const Info = ({ title, progress, dueDate, description }) => {
                 <div className={styles.progress}>
                   <div
                     className={styles.progressBar}
-                    style={{ width: `${progress * 100}%` }}
+                    style={{ width: `${progressPercentage}` }}
                   />
-                  <span>{progress * 100}%</span>
+                  <span>{progressPercentage}</span>
                 </div>
               </div>
               <div className={styles.metaSection}></div>
