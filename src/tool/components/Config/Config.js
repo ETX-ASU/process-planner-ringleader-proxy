@@ -68,7 +68,7 @@ export const Config = () => {
               </Form.Group>
               <Form.Group>
                 <Form.Label>
-                  Required minimum word count in text section
+                  Required minimum word count in text section(s)
                 </Form.Label>
                 <Form.Control
                   type="number"
@@ -83,7 +83,7 @@ export const Config = () => {
               </Form.Group>
               <Form.Group>
                 <Form.Label>
-                  Required minimum items in checklist section
+                  Required minimum items in checklist section(s)
                 </Form.Label>
                 <Form.Control
                   type="number"
@@ -103,7 +103,7 @@ export const Config = () => {
             <div className={styles.content}>
               <p>Standard</p>
               <ul>
-                <li>Add texts to faculty-made tabs</li>
+                <li>Add text to faculty-made sections</li>
                 <li>Add sections to faculty-made tabs</li>
               </ul>
               <hr />
