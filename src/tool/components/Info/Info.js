@@ -16,6 +16,8 @@ export const Info = ({ title, progress, dueDate, description }) => {
 
   const handleModalClick = useCallback((event) => event.stopPropagation(), []);
 
+  const progressValue = parseFloat(progress * 100).toFixed(2) + "%";
+
   return (
     <>
       <div className={styles.infoButton} onClick={handleButtonClick}>
@@ -36,9 +38,9 @@ export const Info = ({ title, progress, dueDate, description }) => {
                 <div className={styles.progress}>
                   <div
                     className={styles.progressBar}
-                    style={{ width: `${progress * 100}%` }}
+                    style={{ width: `${progressValue}` }}
                   />
-                  <span>{progress * 100}%</span>
+                  <span>{progressValue}</span>
                 </div>
               </div>
               <div className={styles.metaSection}></div>
