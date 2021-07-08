@@ -231,7 +231,7 @@ function HomeworkEngager(props) {
   }, []);
 
   useEffect(() => {
-    const [canEnableSubmit] = getCompletionStatus(toolHomeworkData);
+    const canEnableSubmit = getCompletionStatus(toolHomeworkData);
 
     setSubmitEnabled(canEnableSubmit);
   }, [toolHomeworkData]);
