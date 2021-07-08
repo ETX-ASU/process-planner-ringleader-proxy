@@ -1,6 +1,5 @@
 import { v4 as uuid } from "uuid";
 import { EMPTY_HOMEWORK, HOMEWORK_PROGRESS } from "../app/constants";
-import { SECTION_TYPE } from "./constants";
 import { calculateProgress, calculateScorePercentage } from "./utils/progress";
 
 export const getHomeworkStatus = (gradeData, homework) => {
@@ -39,40 +38,24 @@ export const calcPercentCompleted = (assignment, homework) => {
 };
 
 export const getCompletionStatus = (homeworkData) => {
-  if (!homeworkData || !homeworkData.plannerConfig) {
-    return [false, ""];
+  if (
+    !homeworkData ||
+    !homeworkData.plannerConfig ||
+    !homeworkData.plannerData
+  ) {
+    return false;
   }
 
   const reqMinWords = homeworkData.plannerConfig.minWordsCount;
   const reqMinItems = homeworkData.plannerConfig.minChecklistItems;
-  const data = homeworkData.plannerData;
 
-  let result = true;
-  let message = "";
+  const completedFraction = calculateScorePercentage(
+    homeworkData.plannerData,
+    reqMinWords,
+    reqMinItems
+  );
 
-  data.forEach(({ content, title }) => {
-    (content.sections || []).forEach(({ type, ...section }) => {
-      if (
-        result &&
-        type === SECTION_TYPE.text &&
-        calculateWordCount(section.text) < reqMinWords
-      ) {
-        result = false;
-        message = `text sections on tab "${title}"`;
-      }
-
-      if (
-        result &&
-        type === SECTION_TYPE.checklist &&
-        section.items.length < reqMinItems
-      ) {
-        result = false;
-        message = `checklists on tab "${title}"`;
-      }
-    });
-  });
-
-  return [result, message];
+  return completedFraction === 1;
 };
 
 export const calcAutoScore = (assignment, homework) => {
