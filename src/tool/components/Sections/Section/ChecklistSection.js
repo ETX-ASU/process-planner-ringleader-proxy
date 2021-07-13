@@ -69,7 +69,7 @@ export const ChecklistSection = ({
       {userType === USER_TYPE.student && canEdit && (
         <p className={styles.wordCount}>
           <span>
-            At least {minChecklistItems}{" "}
+            At least {minChecklistItems} checked{" "}
             {minChecklistItems === 1 ? "item" : "items"} required
           </span>
         </p>
