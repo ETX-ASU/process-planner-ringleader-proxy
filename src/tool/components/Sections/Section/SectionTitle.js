@@ -48,7 +48,11 @@ export const SectionTitle = ({ id, title, canEdit, onChange, onDelete }) => {
           onHide={handleHideConfirmation}
           title={"Delete Section"}
           buttons={[
-            { name: "Cancel", onClick: handleHideConfirmation },
+            {
+              name: "Cancel",
+              variant: "secondary",
+              onClick: handleHideConfirmation,
+            },
             {
               name: "Delete",
               onClick: () => onDelete(id),

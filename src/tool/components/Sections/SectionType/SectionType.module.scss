@@ -2,7 +2,8 @@
 
 .sectionType {
   align-items: center;
-  background-color: $tab-inactive-background-color;
+  background-color: #00283f;
+  color: #fff;
   display: flex;
   flex-direction: row;
   font-size: 12px;
@@ -15,6 +16,7 @@
 
     &.label {
       font-weight: normal;
+      user-select: none;
     }
   }
 
@@ -24,8 +26,8 @@
       border-color: $switch-color;
     }
 
-    input:checked ~ label::after {
-      background-color: $switch-color !important;
+    input ~ label::after {
+      background-color: #d8292b !important;
     }
   }
 }
