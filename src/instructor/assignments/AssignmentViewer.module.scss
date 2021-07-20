@@ -1,0 +1,39 @@
+.headerCheckbox {
+  color: #fff;
+
+  input {
+    margin-right: .5rem;
+  }
+}
+
+.viewerHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+  margin: 20px 0;
+}
+
+.batchSubmit {
+  background-color: #ccd5da;
+  padding: 20px;
+  margin-right: 20px;
+  flex: 2;
+
+  button {
+    margin-bottom: 10px;
+  }
+}
+
+.summary {
+  background-color: #ccd5da;
+  padding: 20px;
+  margin-right: 20px;
+  flex: 3;
+}
+
+.info {
+  background-color: #ccd5da;
+  padding: 20px;
+  flex: 1;
+}

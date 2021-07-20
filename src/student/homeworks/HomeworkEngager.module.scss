@@ -1,7 +1,9 @@
 .disabledButton {
-  opacity: 0.65;
+  background-color: #ef9491 !important;
+  margin-left: 7px;
 
   &:hover:not(:disabled) {
-    background-color: #007bff !important;
+    cursor: default;
+    background-color: #ef9491 !important;
   }
 }

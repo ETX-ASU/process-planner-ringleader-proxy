@@ -133,9 +133,13 @@ function AssignmentCreator() {
           <ConfirmationModal
             isStatic
             onHide={() => setActiveModal(null)}
-            title={"Cancel Creation Warning"}
+            title="Cancel New Assignment"
             buttons={[
-              { name: "Cancel", onClick: handleCancelCreatingAssignment },
+              {
+                name: "Cancel new assignment",
+                variant: "secondary",
+                onClick: handleCancelCreatingAssignment,
+              },
               {
                 name: "Continue Creating",
                 onClick: () => setActiveModal(null),
@@ -151,7 +155,7 @@ function AssignmentCreator() {
           <ConfirmationModal
             isStatic
             onHide={() => setActiveModal(null)}
-            title={"Assignment Saved"}
+            title="Assignment Saved"
             buttons={[
               { name: "Continue", onClick: handleReturnToCreateOrDupe },
             ]}
@@ -171,8 +175,9 @@ function AssignmentCreator() {
   return (
     <Fragment>
       {activeModal && renderModal()}
-      <HeaderBar title="Create New Assignment">
+      <HeaderBar withLogo title="Create New Assignment">
         <Button
+          variant="secondary"
           onClick={() =>
             setActiveModal({
               type: MODAL_TYPES.cancelNewAssignmentEditsWarning,

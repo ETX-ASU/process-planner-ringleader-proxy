@@ -21,7 +21,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { reportError } from "../../developer/DevUtils";
-// import AssignmentsSelectionList from "../lmsLinkage/AssignmentsSelectionList";
+import styles from "./AssignmentNewOrDupe.module.scss";
+
 library.add(faCopy, faPlus);
 
 function AssignmentNewOrDupe() {
@@ -69,13 +70,6 @@ function AssignmentNewOrDupe() {
       const stranded = allAssignments.filter((a) => a.lineItemId === "");
       setStrandedAssignments(stranded);
 
-      if (allAssignments.length) {
-        const assignmentQueryResults = await API.graphql(
-          graphqlOperation(getAssignment, { id: allAssignments[0].id })
-        );
-        setSelectedAssignment(assignmentQueryResults.data.getAssignment);
-      }
-
       setIsFetchingAssignments(false);
     } catch (error) {
       reportError(
@@ -92,6 +86,12 @@ function AssignmentNewOrDupe() {
 
   async function handleSelectionMade() {
     const selectedId = document.getElementById("assignmentSelector").value;
+
+    if (selectedId === "") {
+      setSelectedAssignment(null);
+      return;
+    }
+
     const assignmentQueryResults = await API.graphql(
       graphqlOperation(getAssignment, { id: selectedId })
     );
@@ -203,6 +203,7 @@ function AssignmentNewOrDupe() {
     <Fragment>
       {activeModal && renderModal()}
       <HeaderBar
+        withLogo
         title="Create New Assignment"
         canCancel={false}
         canSave={false}
@@ -222,106 +223,94 @@ function AssignmentNewOrDupe() {
 
         {!isFetchingAssignments && (
           <Fragment>
-            <Row className={"mt-4 mb-4"}>
+            <Row className={styles.row}>
               <Col>
                 Create a new assignment by selecting one of the following
                 options:
               </Col>
             </Row>
-            <Row className={"ml-2"}>
-              <Col className={"col-6 splitter-right"}>
-                <Container className={"pt-4 pl-4 pr-4 h-100"}>
-                  <Row>
-                    <Col>
-                      <h3 className={"mt-3 mb-2"}>Start a new assignment</h3>
-                      <p>
-                        Staring a new assignment will provide you with a blank
-                        template to build from.
-                      </p>
-                    </Col>
-                  </Row>
-                </Container>
+            <Row className={styles.optionRow}>
+              <Col className={styles.column}>
+                <div>
+                  <h3 className={"mt-3 mb-2"}>Start a new assignment</h3>
+                  <p>
+                    Staring a new assignment will provide you with a blank
+                    template to build from.
+                  </p>
+                </div>
               </Col>
 
-              <div className={"vertical-separator"}>
-                <h3 className={"spacer-word"}>OR</h3>
+              <div className={styles.separator}>
+                <span>OR</span>
               </div>
 
-              <Col className={"col-6"}>
-                <Container className={"pt-4 pl-4 pr-4"}>
-                  <Row>
-                    <Col>
-                      <h3 className={"mt-3 mb-2"}>Duplicate an assignment</h3>
-                      <p>
-                        Choose an existing assignment, duplicate it, then
-                        customize it.
-                      </p>
-                      <div className="form-group">
-                        <select
-                          onChange={handleSelectionMade}
-                          className="form-control"
-                          id="assignmentSelector"
-                          disabled={!assignments.length}
-                        >
-                          {assignments.map((a, i) => (
-                            <option key={i} value={a.id}>
-                              {!a.lineItemId && "*"}
-                              {a.title}
-                            </option>
-                          ))}
-                        </select>
-                        {!assignments.length && (
-                          <h4>
-                            *You must have at least 1 existing assignment before
-                            you can duplicate anything.
-                          </h4>
-                        )}
-                      </div>
-                      {!!strandedAssignments.length && (
-                        <p>
-                          *Marked assignments were not properly created in the
-                          LMS, but can be recovered by selecting it here.
-                        </p>
-                      )}
-                    </Col>
-                  </Row>
-                </Container>
+              <Col className={styles.column}>
+                <div>
+                  <h3 className={"mt-3 mb-2"}>Duplicate an assignment</h3>
+                  <p>
+                    Choose an existing assignment, duplicate it, then customize
+                    it.
+                  </p>
+                  <div className="form-group">
+                    <select
+                      onChange={handleSelectionMade}
+                      className="form-control"
+                      id="assignmentSelector"
+                      disabled={!assignments.length}
+                    >
+                      <option className={styles.placeholder} value="">
+                        Select an assignment
+                      </option>
+                      {assignments.map((a, i) => (
+                        <option key={i} value={a.id}>
+                          {!a.lineItemId && "*"}
+                          {a.title}
+                        </option>
+                      ))}
+                    </select>
+                    {!assignments.length && (
+                      <h4>
+                        *You must have at least 1 existing assignment before you
+                        can duplicate anything.
+                      </h4>
+                    )}
+                  </div>
+                  {!!strandedAssignments.length && (
+                    <p>
+                      *Marked assignments were not properly created in the LMS,
+                      but can be recovered by selecting it here.
+                    </p>
+                  )}
+                </div>
               </Col>
             </Row>
 
-            <Row className={"ml-2"}>
-              <Col className={"col-6 splitter-right"}>
-                <Container className={"p-4 h-100"}>
-                  <Row className={"mt-auto"}>
-                    <Col className={"xbg-light text-center p-2"}>
-                      <Button
-                        className="align-middle"
-                        onClick={handleCreateAssignment}
-                      >
-                        <FontAwesomeIcon className="btn-icon" icon={faPlus} />
-                        New Assignment
-                      </Button>
-                    </Col>
-                  </Row>
-                </Container>
+            <Row className={styles.actionsRow}>
+              <Col className={styles.column}>
+                <div className={styles.actions}>
+                  <Button
+                    className="align-middle"
+                    onClick={handleCreateAssignment}
+                  >
+                    <FontAwesomeIcon className="btn-icon" icon={faPlus} />
+                    New Assignment
+                  </Button>
+                </div>
               </Col>
-              <Col className={"col-6"}>
-                <Container className={"p-4"}>
-                  <Row className={"mt-auto"}>
-                    <Col className={"xbg-light text-center p-2"}>
-                      <Button
-                        className="align-middle"
-                        onClick={handleDupeAssignment}
-                        disabled={!assignments.length}
-                      >
-                        <FontAwesomeIcon className="btn-icon" icon={faCopy} />
-                        {!assignments.length || selectedAssignment?.lineItemId
-                          ? "Duplicate"
-                          : "Recover"}
-                      </Button>
-                    </Col>
-                  </Row>
-                </Container>
+              <div className={styles.separator}></div>
+              <Col className={styles.column}>
+                <div className={styles.actions}>
+                  <Button
+                    className="align-middle"
+                    onClick={handleDupeAssignment}
+                    disabled={!assignments.length}
+                  >
+                    <FontAwesomeIcon className="btn-icon" icon={faCopy} />
+                    {!assignments.length || selectedAssignment?.lineItemId
+                      ? "Duplicate"
+                      : "Recover"}
+                  </Button>
+                </div>
               </Col>
             </Row>
           </Fragment>
