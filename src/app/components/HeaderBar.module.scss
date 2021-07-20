@@ -1,12 +1,12 @@
 .header {
-  background-color: #00283f;
+  background-color: #032d46;
   height: 66px;
   display: flex;
   flex-direction: row;
   align-items: center;
 
   &.withLogo {
-    background: #00283f url("../../logo.svg") 10px center no-repeat;
+    background: #032d46 url("../../logo.svg") 10px center no-repeat;
     background-size: 40px 40px;
     padding-left: 45px;
   }

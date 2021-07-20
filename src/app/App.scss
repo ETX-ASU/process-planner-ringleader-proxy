@@ -127,7 +127,7 @@ button {
 
   &.btn-primary {
     border: none !important;
-    background-color: #de322b;
+    background-color: #de312b;
 
     &:hover {
       &:not(:disabled) {
@@ -156,8 +156,8 @@ button {
 
   &.btn-secondary {
     background-color: #fff !important;
-    border: 1px solid #de322b;
-    color: #de322b !important;
+    border: 1px solid #de312b;
+    color: #de312b !important;
 
     &:hover,
     &:active,
@@ -166,7 +166,7 @@ button {
         box-shadow: none;
         background-color: #fceae9 !important;
         border-color: #ee8986 !important;
-        color: #de322b !important;
+        color: #de312b !important;
       }
     }
   }
@@ -313,7 +313,7 @@ label {
 }
 
 .modal-header {
-  background-color: #00283f;
+  background-color: #032d46;
 }
 
 .modal-title {
