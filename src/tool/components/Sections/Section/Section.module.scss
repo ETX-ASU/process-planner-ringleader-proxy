@@ -41,7 +41,7 @@
     ul {
       @include section;
       list-style: none;
-      margin: 0;
+      margin: 0 0 6px 0;
 
       li {
         @include flex;

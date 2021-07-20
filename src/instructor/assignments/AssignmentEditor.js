@@ -110,9 +110,13 @@ function AssignmentEditor() {
           <ConfirmationModal
             isStatic
             onHide={() => setActiveModal(null)}
-            title={"Cancel Edits Warning"}
+            title={"Cancel Editing Assignment"}
             buttons={[
-              { name: "Cancel", onClick: returnToNewOrDupeAssignmentScreen },
+              {
+                name: "Cancel",
+                variant: "secondary",
+                onClick: returnToNewOrDupeAssignmentScreen,
+              },
               { name: "Continue Editing", onClick: () => setActiveModal(null) },
             ]}
           >
@@ -130,7 +134,11 @@ function AssignmentEditor() {
             onHide={() => setActiveModal(null)}
             title={"Cancel Editing Assignment"}
             buttons={[
-              { name: "Cancel", onClick: returnToViewAssignmentScreen },
+              {
+                name: "Cancel",
+                variant: "secondary",
+                onClick: returnToViewAssignmentScreen,
+              },
               {
                 name: "Continue Creating",
                 onClick: () => setActiveModal(null),
@@ -153,7 +161,7 @@ function AssignmentEditor() {
     <Fragment>
       {activeModal && renderModal()}
       <HeaderBar title={`Edit: ${formData.title}`}>
-        <Button onClick={handleCancelBtn} className="mr-2">
+        <Button variant="secondary" onClick={handleCancelBtn} className="mr-2">
           Cancel
         </Button>
         <Button onClick={handleUpdateBtn}>Update</Button>

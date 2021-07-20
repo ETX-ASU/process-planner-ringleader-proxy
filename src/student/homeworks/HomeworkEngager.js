@@ -185,7 +185,11 @@ function HomeworkEngager(props) {
             onHide={() => setActiveModal(null)}
             title={"Are you sure?"}
             buttons={[
-              { name: "Cancel", onClick: () => setActiveModal(null) },
+              {
+                name: "Cancel",
+                variant: "secondary",
+                onClick: () => setActiveModal(null),
+              },
               { name: "Submit", onClick: submitHomeworkForReview },
             ]}
           >
@@ -239,7 +243,7 @@ function HomeworkEngager(props) {
   return (
     <Fragment>
       {activeModal && renderModal()}
-      <HeaderBar title={assignment.title}>
+      <HeaderBar title={assignment.title} smallTitle>
         <Button onClick={handleSaveButtonClick}>Save</Button>
         &nbsp;&nbsp;
         {isSubmitEnabled ? (

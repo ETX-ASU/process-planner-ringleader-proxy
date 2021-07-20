@@ -107,7 +107,11 @@ export const Tab = ({
           onHide={handleHideConfirmation}
           title={"Delete Tab"}
           buttons={[
-            { name: "Cancel", onClick: handleHideConfirmation },
+            {
+              name: "Cancel",
+              variant: "secondary",
+              onClick: handleHideConfirmation,
+            },
             {
               name: "Delete",
               onClick: onDeleteClick,

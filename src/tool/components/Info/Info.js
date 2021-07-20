@@ -36,7 +36,7 @@ export const Info = ({ title, progress, dueDate, description }) => {
               onClick={closeModal}
               className={styles.closeButton}
             />
-            <h1 className={styles.title}>{title}</h1>
+            <div className={styles.title}>{title}</div>
             <div className={styles.meta}>
               <div className={styles.metaSection}>
                 <h3>Progress</h3>
