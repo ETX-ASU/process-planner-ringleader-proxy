@@ -27,8 +27,8 @@ export const YourAccessLevel = ({ level }) => {
         <Modal.Body>
           <p>You can:</p>
           <ul>
-            <li>Add text to faculty-made sections</li>
-            <li>Add sections to faculty-made tabs</li>
+            <li>Add text to instructor-made sections</li>
+            <li>Add sections to instructor-made tabs</li>
             {level !== ACCESS_LEVELS.readonly && (
               <li>Make and edit new tabs</li>
             )}
