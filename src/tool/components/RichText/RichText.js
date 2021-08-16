@@ -32,7 +32,7 @@ export const RichText = ({ html, onChange }) => {
       editorState={editorState}
       onEditorStateChange={setEditorState}
       toolbar={richTextToolbar}
-      placeholder="Enter directions or information for your students here..."
+      placeholder="Enter instructions or information for your students here..."
     />
   );
 };
