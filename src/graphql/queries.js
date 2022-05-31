@@ -199,3 +199,40 @@ export const listHomeworks = /* GraphQL */ `
     }
   }
 `;
+export const homeworkByStudentAndAssignment = /* GraphQL */ `
+  query HomeworkByStudentAndAssignment(
+    $assignmentId: ID
+    $studentOwnerId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelHomeworkFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    homeworkByStudentAndAssignment(
+      assignmentId: $assignmentId
+      studentOwnerId: $studentOwnerId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        assignmentId
+        studentOwnerId
+        beganOnDate
+        submittedOnDate
+        isLocked
+        toolHomeworkData {
+          chartType
+          chartOptions
+          observations
+          dataSet
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

@@ -5,7 +5,7 @@ import { v4 as uuid } from "uuid";
 
 import {HOMEWORK_PROGRESS, UI_SCREEN_MODES, EMPTY_HOMEWORK} from "../app/constants";
 import {Col, Container, Row} from "react-bootstrap";
-import {listHomeworks} from "../graphql/queries";
+import {homeworkByStudentAndAssignment} from "../graphql/queries";
 import {createHomework} from "../graphql/mutations";
 import {setActiveUiScreenMode} from "../app/store/appReducer";
 import HomeworkViewer from "./homeworks/HomeworkViewer";
@@ -38,25 +38,21 @@ function StudentDashboard() {
 
 	async function fetchAndSetHomework() {
 		try {
-			const fetchHomeworkResult = await API.graphql(graphqlOperation(listHomeworks, {filter: {"studentOwnerId":{eq:activeUser.id}, "assignmentId":{eq:assignment.id}}}));
-			if (!fetchHomeworkResult.data.listHomeworks.items?.length) {
-        console.warn("NO homework exists for this student. Attempting to create.")
-			  const freshHomework = Object.assign({}, EMPTY_HOMEWORK, {
-			    id: uuid(),
-          beganOnDate: moment().valueOf(),
-          studentOwnerId: activeUser.id,
-          assignmentId: assignment.id,
-          toolHomeworkData: {
-            plannerData: [...assignment.toolAssignmentData.plannerData],
+			const fetchHomeworkResult = await API.graphql(
+        graphqlOperation(
+          homeworkByStudentAndAssignment,
+          {
+            assignmentId: assignment.id,
+            studentOwnerId: { eq:activeUser.id },
           },
-			  });
-        const resultHomework = await API.graphql({query: createHomework, variables: {input: freshHomework}});
+        ),
+      );
+      if (!fetchHomeworkResult.data?.homeworkByStudentAndAssignment?.items?.length) {
         console.warn("Successful in creating homework for this student");
-
         await setHomework({...resultHomework.data.createHomework, scoreGiven:0, homeworkStatus:HOMEWORK_PROGRESS.notBegun, comment:'' })
         dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.editHomework));
       } else {
-			  const theHomework = fetchHomeworkResult.data.listHomeworks.items[0];
+			  const theHomework = fetchHomeworkResult.data.homeworkByStudentAndAssignment.items[0];
         let scoreData = await fetchGradeForStudent(assignment.id, activeUser.id);
         if (!scoreData) scoreData = {scoreGiven:0, gradingProgress: HOMEWORK_PROGRESS.notBegun, comment:'' };
 
