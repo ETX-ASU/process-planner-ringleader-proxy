@@ -1,5 +1,5 @@
-import { v4 as uuid } from "uuid";
-import { ACCESS_LEVELS, EMPTY_SECTION, USER_TYPE } from "../constants";
+import { v4 as uuid } from 'uuid';
+import { ACCESS_LEVELS, EMPTY_SECTION, USER_TYPE } from '../constants';
 
 const changeTabContent = (tabs, index, content) => [
   ...tabs.slice(0, index),
@@ -25,9 +25,7 @@ export const changeTabDescription = (tabs, index, html) =>
 
 export const changeTabSection = (tabs, index, sectionId, section) => {
   const tabSections = tabs[index].content.sections;
-  const sectionIndex = tabSections.findIndex(
-    (section) => section.id === sectionId
-  );
+  const sectionIndex = tabSections.findIndex((section) => section.id === sectionId);
 
   if (sectionIndex < 0) {
     return tabs;
@@ -61,25 +59,14 @@ export const addTabSection = (tabs, index, ownerId) => {
 };
 
 export const deleteTabSection = (tabs, index, sectionId) => {
-  const tabSections = tabs[index].content.sections.filter(
-    (section) => section.id !== sectionId
-  );
+  const tabSections = tabs[index].content.sections.filter((section) => section.id !== sectionId);
 
   return changeTabContent(tabs, index, {
     sections: [...tabSections],
   });
 };
 
-export const canUserModifySection = (
-  sectionOwnerId,
-  userId,
-  userType,
-  accessLevel
-) => {
-  if (accessLevel === ACCESS_LEVELS.readonly) {
-    return false;
-  }
-
+export const canUserModifySection = (sectionOwnerId, userId, userType, accessLevel) => {
   if (sectionOwnerId === userId) {
     return true;
   }
