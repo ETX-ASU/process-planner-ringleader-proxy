@@ -54,11 +54,7 @@ export const getAssignment = /* GraphQL */ `
   }
 `;
 export const listAssignments = /* GraphQL */ `
-  query ListAssignments(
-    $filter: ModelAssignmentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListAssignments($filter: ModelAssignmentFilterInput, $limit: Int, $nextToken: String) {
     listAssignments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -151,11 +147,7 @@ export const getHomework = /* GraphQL */ `
   }
 `;
 export const listHomeworks = /* GraphQL */ `
-  query ListHomeworks(
-    $filter: ModelHomeworkFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListHomeworks($filter: ModelHomeworkFilterInput, $limit: Int, $nextToken: String) {
     listHomeworks(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -224,10 +216,32 @@ export const homeworkByStudentAndAssignment = /* GraphQL */ `
         submittedOnDate
         isLocked
         toolHomeworkData {
-          chartType
-          chartOptions
-          observations
-          dataSet
+          plannerData {
+            id
+            title
+            content {
+              description
+              paneSize
+              sections {
+                id
+                ownerId
+                title
+                type
+                text
+                items {
+                  id
+                  label
+                  done
+                }
+              }
+            }
+            ownerId
+          }
+          files {
+            sectionId
+            fileName
+            fileKey
+          }
         }
         createdAt
         updatedAt
