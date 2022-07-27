@@ -76,10 +76,6 @@ export const canUserModifySection = (
   userType,
   accessLevel
 ) => {
-  if (accessLevel === ACCESS_LEVELS.readonly) {
-    return false;
-  }
-
   if (sectionOwnerId === userId) {
     return true;
   }
