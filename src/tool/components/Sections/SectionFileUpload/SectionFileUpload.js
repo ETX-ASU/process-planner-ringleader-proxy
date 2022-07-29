@@ -7,7 +7,7 @@ import { faPaperclip, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { reportError } from "../../../../developer/DevUtils";
 import { useProcessPlanner } from "../../../hooks/useProcessPlanner";
 import { MAX_UPLOAD_FILE_SIZE } from "../../../constants";
-import styles from "./SectionFileUpload.module.scss"; 
+import styles from "./SectionFileUpload.module.scss";
 
 export const SectionFileUpload = ({ sectionId }) => {
   const [isUploading, setIsUploading] = useState(false);
