@@ -75,7 +75,7 @@ export const calcAutoScore = (assignment, homework) => {
     requiredMinimumWords,
     requiredMinimumCheckItems
   );
-  const maxScore = calcMaxScoreForAssignment();
+  const maxScore = calcMaxScoreForAssignment(assignment);
 
   return Math.round(maxScore * score);
 };
