@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 import { v4 as uuid } from "uuid";
 import { Storage } from "aws-amplify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,7 +7,7 @@ import { faPaperclip, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { reportError } from "../../../../developer/DevUtils";
 import { useProcessPlanner } from "../../../hooks/useProcessPlanner";
 import { MAX_UPLOAD_FILE_SIZE } from "../../../constants";
-import styles from "./SectionFileUpload.module.scss";
+import styles from "./SectionFileUpload.module.scss"; 
 
 export const SectionFileUpload = ({ sectionId }) => {
   const [isUploading, setIsUploading] = useState(false);
@@ -54,12 +53,17 @@ export const SectionFileUpload = ({ sectionId }) => {
   );
 
   return (
-    <div className={clsx(styles.button, isUploading && styles.isUploading)}>
-      <FontAwesomeIcon icon={faSpinner} className={styles.spinner} />
-      <FontAwesomeIcon icon={faPaperclip} />
-      <span>Attach file</span>
-      <input type="file" onChange={handleFileUpload} />
-    </div>
+    <label className={styles.button}>
+      {isUploading ? (
+        <FontAwesomeIcon icon={faSpinner} className={styles.spinner} />
+      ) : (
+        <React.Fragment>
+          <FontAwesomeIcon icon={faPaperclip} />
+          <span>Attach file</span>
+          <input type="file" disabled={isUploading} onChange={handleFileUpload} />
+        </React.Fragment>
+      )}
+    </label>
   );
 };
 

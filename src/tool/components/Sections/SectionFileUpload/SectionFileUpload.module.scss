@@ -4,8 +4,12 @@
 .button {
   align-items: center;
   border: 1px solid transparent;
+  color: currentColor;
+  cursor: pointer;
   display: inline-flex;
   flex-direction: row;
+  font: inherit;
+  gap: 5px;
   justify-content: center;
   overflow: hidden;
   padding: 5px 8px;
@@ -13,34 +17,11 @@
   width: 117px;
 
   .spinner {
-    display: none;
-  }
-
-  &.isUploading {
-    span,
-    svg,
-    input {
-      display: none;
-    }
-
-    .spinner {
-      display: block;
-      animation: spin 1s infinite;
-    }
-  }
-
-  span {
-    cursor: pointer;
-    margin-left: 10px;
+    display: block;
+    animation: spin 1s infinite;
   }
 
   input {
-    bottom: 0;
-    cursor: pointer;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    opacity: 0;
+    display: none;
   }
 }
