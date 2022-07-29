@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 import { v4 as uuid } from "uuid";
 import { Storage } from "aws-amplify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -54,12 +53,17 @@ export const SectionFileUpload = ({ sectionId }) => {
   );
 
   return (
-    <div className={clsx(styles.button, isUploading && styles.isUploading)}>
-      <FontAwesomeIcon icon={faSpinner} className={styles.spinner} />
-      <FontAwesomeIcon icon={faPaperclip} />
-      <span>Attach file</span>
-      <input type="file" onChange={handleFileUpload} />
-    </div>
+    <label className={styles.button}>
+      {isUploading ? (
+        <FontAwesomeIcon icon={faSpinner} className={styles.spinner} />
+      ) : (
+        <React.Fragment>
+          <FontAwesomeIcon icon={faPaperclip} />
+          <span>Attach file</span>
+          <input type="file" disabled={isUploading} onChange={handleFileUpload} />
+        </React.Fragment>
+      )}
+    </label>
   );
 };
 
