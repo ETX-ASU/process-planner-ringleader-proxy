@@ -83,7 +83,7 @@ export const Config = () => {
               </Form.Group>
               <Form.Group>
                 <Form.Label>
-                  Required minimum checked items in checklist section(s)
+                  Required minimum checklist items in checklist section(s)
                 </Form.Label>
                 <Form.Control
                   type="number"
