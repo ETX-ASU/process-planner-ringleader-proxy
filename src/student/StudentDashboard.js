@@ -42,6 +42,7 @@ function StudentDashboard() {
           studentOwnerId: { eq: activeUser.id },
         }),
       );
+
       if (!fetchHomeworkResult.data?.homeworkByStudentAndAssignment?.items?.length) {
         console.warn('NO homework exists for this student. Attempting to create.');
         const freshHomework = Object.assign({}, EMPTY_HOMEWORK, {
@@ -62,6 +63,7 @@ function StudentDashboard() {
           homeworkStatus: HOMEWORK_PROGRESS.notBegun,
           comment: '',
         });
+
         dispatch(setActiveUiScreenMode(UI_SCREEN_MODES.editHomework));
       } else {
         const theHomework = fetchHomeworkResult.data.homeworkByStudentAndAssignment.items[0];
@@ -69,7 +71,7 @@ function StudentDashboard() {
         if (!scoreData) scoreData = { scoreGiven: 0, gradingProgress: HOMEWORK_PROGRESS.notBegun, comment: '' };
 
         theHomework.homeworkStatus = getHomeworkStatus(scoreData, theHomework);
-        await setHomework(theHomework);
+        setHomework(theHomework);
 
         const uiMode = theHomework.submittedOnDate ? UI_SCREEN_MODES.reviewHomework : UI_SCREEN_MODES.editHomework;
         dispatch(setActiveUiScreenMode(uiMode));
