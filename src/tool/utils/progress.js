@@ -49,8 +49,7 @@ export const calculateScorePercentage = (
 
         if (
           section.type === SECTION_TYPE.checklist &&
-          section.items.length >= minCheckItems &&
-          section.items.filter((item) => !item.done).length === 0
+          section.items.length >= minCheckItems
         ) {
           filled += 1;
         }

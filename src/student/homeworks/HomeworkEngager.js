@@ -219,7 +219,7 @@ function HomeworkEngager(props) {
             buttons={[{ name: "OK", onClick: closeSaveModal }]}
           >
             <p>
-              You homework is saved. You can continue editing or close this
+              Your homework is saved. You can continue editing or close this
               window and come back later.
             </p>
           </ConfirmationModal>

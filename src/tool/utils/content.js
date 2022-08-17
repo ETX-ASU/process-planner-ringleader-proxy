@@ -66,7 +66,12 @@ export const deleteTabSection = (tabs, index, sectionId) => {
   });
 };
 
-export const canUserModifySection = (sectionOwnerId, userId, userType, accessLevel) => {
+export const canUserModifySection = (
+  sectionOwnerId,
+  userId,
+  userType,
+  accessLevel
+) => {
   if (sectionOwnerId === userId) {
     return true;
   }
