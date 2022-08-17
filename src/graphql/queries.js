@@ -54,11 +54,7 @@ export const getAssignment = /* GraphQL */ `
   }
 `;
 export const listAssignments = /* GraphQL */ `
-  query ListAssignments(
-    $filter: ModelAssignmentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListAssignments($filter: ModelAssignmentFilterInput, $limit: Int, $nextToken: String) {
     listAssignments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -151,11 +147,7 @@ export const getHomework = /* GraphQL */ `
   }
 `;
 export const listHomeworks = /* GraphQL */ `
-  query ListHomeworks(
-    $filter: ModelHomeworkFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListHomeworks($filter: ModelHomeworkFilterInput, $limit: Int, $nextToken: String) {
     listHomeworks(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -199,7 +191,6 @@ export const listHomeworks = /* GraphQL */ `
     }
   }
 `;
-
 export const homeworkByStudentAndAssignment = /* GraphQL */ `
   query HomeworkByStudentAndAssignment(
     $assignmentId: ID
