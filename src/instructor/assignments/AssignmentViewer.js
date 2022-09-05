@@ -123,6 +123,7 @@ function AssignmentViewer(props) {
         homeworkForStudent
       );
       return Object.assign({}, s, {
+        normalizedName: s.name.split(' ').reverse().join(' '),
         randomOrderNum: positions.shift(),
         scoreGiven: gradeDataForStudent.scoreGiven,
         scoreMaximum: gradeDataForStudent.scoreMaximum,
@@ -135,7 +136,6 @@ function AssignmentViewer(props) {
     });
 
     setStudents(enhancedDataStudents);
-    console.log("ENHANCED STUDENTS[29] NOW: ", enhancedDataStudents[29]);
   }, [assignment, members, homeworks, grades, isHideStudentIdentity]);
 
   /**
@@ -169,9 +169,11 @@ function AssignmentViewer(props) {
   function handleHomeworksResult(result) {
     let rawHomeworks = result.data.listHomeworks.items;
 
-    if (isLoadingHomeworks) setIsLoadingHomeworks(false);
-
     dispatch(addHomeworksData(rawHomeworks));
+
+    if (!result.data.listHomeworks.nextToken) {
+      setIsLoadingHomeworks(false);
+    }
 
     setNextTokenVal(result.data.listHomeworks.nextToken);
   }
