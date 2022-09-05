@@ -92,7 +92,7 @@ function HomeworkListing(props) {
         items.sort((a, b) =>
           isHideStudentIdentity
             ? a.randomOrderNum - b.randomOrderNum
-            : a.name.localeCompare(b.name)
+            : a.normalizedName.localeCompare(b.normalizedName),
         );
         break;
       case SORT_BY.autoScore:
@@ -111,7 +111,7 @@ function HomeworkListing(props) {
           if (!a.comment && !!b.comment) return 1;
           return isHideStudentIdentity
             ? a.randomOrderNum - b.randomOrderNum
-            : a.name.localeCompare(b.name);
+            : a.normalizedName.localeCompare(b.normalizedName);
         });
         break;
       case HOMEWORK_PROGRESS.inProgress:
@@ -129,7 +129,7 @@ function HomeworkListing(props) {
           if (aVal !== bVal) return aVal - bVal;
           return isHideStudentIdentity
             ? a.randomOrderNum - b.randomOrderNum
-            : a.name.localeCompare(b.name);
+            : a.normalizedName.localeCompare(b.normalizedName);
         });
         break;
       case HOMEWORK_PROGRESS.submitted:
@@ -147,7 +147,7 @@ function HomeworkListing(props) {
             return a.percentCompleted - b.percentCompleted;
           return isHideStudentIdentity
             ? a.randomOrderNum - b.randomOrderNum
-            : a.name.localeCompare(b.name);
+            : a.normalizedName.localeCompare(b.normalizedName);
         });
         break;
       case HOMEWORK_PROGRESS.fullyGraded:
@@ -165,14 +165,14 @@ function HomeworkListing(props) {
             return a.percentCompleted - b.percentCompleted;
           return isHideStudentIdentity
             ? a.randomOrderNum - b.randomOrderNum
-            : a.name.localeCompare(b.name);
+            : a.normalizedName.localeCompare(b.normalizedName);
         });
         break;
       default:
         items.sort((a, b) =>
           isHideStudentIdentity
             ? a.randomOrderNum - b.randomOrderNum
-            : a.name.localeCompare(b.name)
+            : a.normalizedName.localeCompare(b.normalizedName)
         );
         break;
     }
@@ -401,14 +401,14 @@ function HomeworkListing(props) {
                             className={"ml-2"}
                             icon={faCaretDown}
                           />
-                        )}
+                      )}
                       {sortBy.type === SORT_BY.autoScore &&
                         sortBy.isAscending && (
                           <FontAwesomeIcon
                             className={"ml-2"}
                             icon={faCaretUp}
                           />
-                        )}
+                      )}
                     </th>
                   )}
                   <th
@@ -436,11 +436,11 @@ function HomeworkListing(props) {
                           className={"ml-2"}
                           icon={faCaretDown}
                         />
-                      )}
+                    )}
                     {sortBy.type === SORT_BY.hasComment &&
                       sortBy.isAscending && (
                         <FontAwesomeIcon className={"ml-2"} icon={faCaretUp} />
-                      )}
+                    )}
                   </th>
                   <th
                     scope="col"
