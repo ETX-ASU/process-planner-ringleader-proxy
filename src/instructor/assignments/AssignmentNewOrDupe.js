@@ -99,6 +99,7 @@ function AssignmentNewOrDupe() {
   }
 
   async function handleDupeAssignment(e) {
+    console.log('Selected:', selectedAssignment);
     try {
       const inputData = Object.assign({}, selectedAssignment, {
         title: !selectedAssignment.lineItemId

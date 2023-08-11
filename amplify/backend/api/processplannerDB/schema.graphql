@@ -60,12 +60,15 @@ type Assignment @model {
   isArchived: Boolean
   isFavorite: Boolean
   toolAssignmentData: ToolAssignmentData
+  allowResubmission: Boolean
 }
 
-type Homework @model
+type Homework
+  @model
+  @key(name: "ByAssignment", fields: ["assignmentId"], queryField: "homeworkByAssignment")
   @key(
-    name: "ByStudentAndAssignment",
-    fields: ["assignmentId", "studentOwnerId"],
+    name: "ByStudentAndAssignment"
+    fields: ["assignmentId", "studentOwnerId"]
     queryField: "homeworkByStudentAndAssignment"
   ) {
   id: ID!

@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "processplannerdf68f273": {}
+      },
+      "storage": {
+        "processplannerstorage": {}
+      },
+      "api": {
+        "processplannerDB": {}
       }
     }
   }

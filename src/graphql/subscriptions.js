@@ -32,6 +32,7 @@ export const onCreateAssignment = /* GraphQL */ `
           maxScore
         }
       }
+      allowResubmission
       createdAt
       updatedAt
     }
@@ -68,6 +69,7 @@ export const onUpdateAssignment = /* GraphQL */ `
           maxScore
         }
       }
+      allowResubmission
       createdAt
       updatedAt
     }
@@ -104,6 +106,7 @@ export const onDeleteAssignment = /* GraphQL */ `
           maxScore
         }
       }
+      allowResubmission
       createdAt
       updatedAt
     }

@@ -6,8 +6,8 @@ function ToggleSwitch(props) {
     <div className="toggle-switch">
       <div className="switch">
         <div>
-          <input type="checkbox" id={`cbox-autoscore`} disabled={props.disabled} checked={props.value} onChange={props.handleToggle} />
-          <label htmlFor={`cbox-autoscore`}>
+          <input type="checkbox" id={props.id} disabled={props.disabled} checked={props.value} onChange={props.handleToggle} />
+          <label htmlFor={props.id}>
             <span className={`${props.disabled ? 'isDisabled' : ''}`}></span>
           </label>
         </div>
