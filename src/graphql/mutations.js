@@ -32,6 +32,7 @@ export const createAssignment = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {
@@ -88,6 +89,7 @@ export const updateAssignment = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {
@@ -144,6 +146,7 @@ export const deleteAssignment = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {
@@ -192,6 +195,7 @@ export const createHomework = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {
@@ -237,6 +241,7 @@ export const updateHomework = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {

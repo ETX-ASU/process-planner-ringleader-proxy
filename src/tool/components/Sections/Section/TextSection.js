@@ -10,6 +10,7 @@ export const TextSection = ({
   value,
   onChange,
   userType,
+  placeholder = "Enter text here",
 }) => {
   const [wordCount, setWordCount] = useState(
     value.length > 0 ? calculateWordCount(value) : 0
@@ -31,7 +32,7 @@ export const TextSection = ({
       <textarea
         value={value}
         onChange={handleChange}
-        placeholder="Enter text here"
+        placeholder={placeholder}
       />
       {userType === USER_TYPE.student && canEdit && (
         <p className={styles.wordCount}>
@@ -49,4 +50,5 @@ TextSection.propTypes = {
   canEdit: PropTypes.bool.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
 };

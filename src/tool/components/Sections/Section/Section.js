@@ -93,6 +93,10 @@ export const Section = ({
     [onChange, section]
   );
 
+  const handleDescriptionChange = (event) => {
+    onChange(section.id, { ...section, description: event.target.value });
+  };
+
   const sectionFiles = getSectionFiles(section.id);
 
   const canEditFiles = canEditContent && userType === USER_TYPE.student;
@@ -108,6 +112,18 @@ export const Section = ({
         onChange={handleTitleChange}
         onDelete={onDelete}
       />
+      {canEditStructure ? (
+        <textarea
+          value={section.description || ""}
+          onChange={handleDescriptionChange}
+          disabled={!canEditStructure}
+          placeholder="Write further details here"
+        />
+      ) : (
+        <div className={styles.description}>
+          {section.description}
+        </div>
+      )}
       <SectionType
         type={section.type}
         id={section.id}

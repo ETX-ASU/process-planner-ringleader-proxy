@@ -22,18 +22,18 @@
       @include section;
     }
 
-    textarea {
-      @include section;
-      resize: vertical;
+  }
+  textarea {
+    @include section;
+    resize: vertical;
 
-      &::placeholder {
-        color: $tab-icon-color;
-        font-style: italic;
-      }
+    &::placeholder {
+      color: $tab-icon-color;
+      font-style: italic;
+    }
 
-      &:focus {
-        outline: none;
-      }
+    &:focus {
+      outline: none;
     }
   }
 
@@ -135,4 +135,9 @@
   font-size: 14px;
   justify-content: space-between;
   margin-top: 0;
+}
+
+.description {
+  margin-bottom: 10px;
+  font-size: 14px;
 }
