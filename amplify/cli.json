@@ -6,7 +6,7 @@
       "useexperimentalpipelinedtransformer": false,
       "enableiterativegsiupdates": false,
       "securityEnhancementNotification": false,
-      "showfieldauthnotification": false
+      "showFieldAuthNotification": false
     },
     "frontend-ios": {
       "enablexcodeintegration": true
