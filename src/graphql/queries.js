@@ -29,6 +29,7 @@ export const getAssignment = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {
@@ -48,13 +49,18 @@ export const getAssignment = /* GraphQL */ `
           maxScore
         }
       }
+      allowResubmission
       createdAt
       updatedAt
     }
   }
 `;
 export const listAssignments = /* GraphQL */ `
-  query ListAssignments($filter: ModelAssignmentFilterInput, $limit: Int, $nextToken: String) {
+  query ListAssignments(
+    $filter: ModelAssignmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listAssignments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -71,6 +77,7 @@ export const listAssignments = /* GraphQL */ `
         isUseAutoSubmit
         isArchived
         isFavorite
+        allowResubmission
         toolAssignmentData {
           plannerData {
             id
@@ -82,6 +89,7 @@ export const listAssignments = /* GraphQL */ `
                 id
                 ownerId
                 title
+                description
                 type
                 text
                 items {
@@ -124,6 +132,7 @@ export const getHomework = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {
@@ -147,7 +156,11 @@ export const getHomework = /* GraphQL */ `
   }
 `;
 export const listHomeworks = /* GraphQL */ `
-  query ListHomeworks($filter: ModelHomeworkFilterInput, $limit: Int, $nextToken: String) {
+  query ListHomeworks(
+    $filter: ModelHomeworkFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listHomeworks(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -167,6 +180,7 @@ export const listHomeworks = /* GraphQL */ `
                 id
                 ownerId
                 title
+                description
                 type
                 text
                 items {
@@ -174,6 +188,7 @@ export const listHomeworks = /* GraphQL */ `
                   label
                   done
                 }
+                nextToken
               }
             }
             ownerId
@@ -226,6 +241,7 @@ export const homeworkByStudentAndAssignment = /* GraphQL */ `
                 id
                 ownerId
                 title
+                description
                 type
                 text
                 items {

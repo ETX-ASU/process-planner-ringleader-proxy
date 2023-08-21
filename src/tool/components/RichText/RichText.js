@@ -12,7 +12,7 @@ import draftToHtml from "draftjs-to-html";
 import { richTextToolbar } from "./consts";
 import "./RichText.module.scss";
 
-export const RichText = ({ html, onChange }) => {
+export const RichText = ({ html, onChange, placeholder = "Enter instructions or information for your students here..." }) => {
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(
       ContentState.createFromBlockArray(convertFromHTML(html))
@@ -32,7 +32,7 @@ export const RichText = ({ html, onChange }) => {
       editorState={editorState}
       onEditorStateChange={setEditorState}
       toolbar={richTextToolbar}
-      placeholder="Enter instructions or information for your students here..."
+      placeholder={placeholder}
     />
   );
 };
@@ -40,4 +40,5 @@ export const RichText = ({ html, onChange }) => {
 RichText.propTypes = {
   html: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
 };

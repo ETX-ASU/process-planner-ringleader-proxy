@@ -89,6 +89,13 @@ function AssignmentEditor() {
     });
   }
 
+  function toggleAllowResubmission(e) {
+    setFormData({
+      ...formData,
+      allowResubmission: !formData.allowResubmission,
+    });
+  }
+
   function handleToolChanges(toolAssignmentData) {
     setFormData({ ...formData, toolAssignmentData });
   }
@@ -260,6 +267,25 @@ function AssignmentEditor() {
               </Col>
             </Row>
           )}
+          <Row className="ml-2 mt-2">
+            <Col className="col-6">
+              <label>
+                <h3>Allow resubmission</h3>
+              </label>
+            </Col>
+            <Col className="col-6 d-flex flex-row-reverse">
+              <div
+                className="custom-control custom-switch"
+                style={{ top: `6px` }}
+              >
+                <ToggleSwitch
+                  id="allowResubmission"
+                  value={formData.allowResubmission}
+                  handleToggle={toggleAllowResubmission}
+                />
+              </div>
+            </Col>
+          </Row>
         </Container>
       </form>
 

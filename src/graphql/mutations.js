@@ -32,6 +32,7 @@ export const createAssignment = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {
@@ -51,6 +52,7 @@ export const createAssignment = /* GraphQL */ `
           maxScore
         }
       }
+      allowResubmission
       createdAt
       updatedAt
     }
@@ -87,6 +89,7 @@ export const updateAssignment = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {
@@ -106,6 +109,7 @@ export const updateAssignment = /* GraphQL */ `
           maxScore
         }
       }
+      allowResubmission
       createdAt
       updatedAt
     }
@@ -142,6 +146,7 @@ export const deleteAssignment = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {
@@ -161,6 +166,7 @@ export const deleteAssignment = /* GraphQL */ `
           maxScore
         }
       }
+      allowResubmission
       createdAt
       updatedAt
     }
@@ -189,6 +195,7 @@ export const createHomework = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {
@@ -234,6 +241,7 @@ export const updateHomework = /* GraphQL */ `
               id
               ownerId
               title
+              description
               type
               text
               items {

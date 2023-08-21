@@ -2,14 +2,15 @@ import React, { useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "clsx";
 import Split from "react-split";
+import { USER_TYPE } from "../../constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsAltH } from "@fortawesome/free-solid-svg-icons";
 import { useProcessPlanner } from "../../hooks/useProcessPlanner";
 import { RichText } from "../RichText/RichText";
 import { AddSectionButton } from "../Sections/AddSection/AddSectionButton";
 import { Section } from "../Sections/Section/Section";
-import styles from "./Content.module.scss";
 import { sectionsProps } from "../../types/tabs";
+import styles from "./Content.module.scss";
 
 export const Content = ({
   canEditContent,
@@ -27,6 +28,7 @@ export const Content = ({
     deleteTabSection,
     canModifySection,
     canAddSection,
+    userType,
   } = useProcessPlanner();
 
   const gutterRef = useRef();
@@ -67,14 +69,18 @@ export const Content = ({
   );
 
   const renderDescription = (w) => (
-    <div
+    <div 
       className={styles.description}
       style={{ width: w === undefined ? undefined : `${w}%`, flex: "initial" }}
     >
+      {(userType === USER_TYPE.instructor || Boolean(content.description)) && (
+        <div className={styles.title}>General instructions for this tab</div>
+      )}
       {canChangeDescription ? (
         <RichText
           html={content.description}
           onChange={handleDescriptionChange}
+          placeholder="Use this panel for instructions or informations for this tab…"
         />
       ) : (
         <div dangerouslySetInnerHTML={{ __html: content.description }} />

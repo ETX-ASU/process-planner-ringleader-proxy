@@ -185,17 +185,14 @@ function HomeworkEngager(props) {
             onHide={() => setActiveModal(null)}
             title={"Are you sure?"}
             buttons={[
-              {
-                name: "Cancel",
-                variant: "secondary",
-                onClick: () => setActiveModal(null),
-              },
-              { name: "Submit", onClick: submitHomeworkForReview },
+              { name: 'Cancel', variant: 'secondary', onClick: () => setActiveModal(null) },
+              { name: 'Submit', onClick: submitHomeworkForReview },
             ]}
           >
             <p>
-              Once submitted, you cannot go back to make additional edits to
-              your assignment.
+              {assignment.allowResubmission
+                ? 'Your assignment will be marked as submitted, but you will be able to make additional edits.'
+                : 'Once submitted, you cannot go back to make additional edits to your assignment.'}
             </p>
           </ConfirmationModal>
         );
@@ -244,10 +241,16 @@ function HomeworkEngager(props) {
     <Fragment>
       {activeModal && renderModal()}
       <HeaderBar title={assignment.title} smallTitle>
-        <Button onClick={handleSaveButtonClick}>Save</Button>
-        &nbsp;&nbsp;
+        {!homework.submittedOnDate && (
+          <>
+            <Button onClick={handleSaveButtonClick}>Save</Button>
+            &nbsp;
+          </>
+        )}
         {isSubmitEnabled ? (
-          <Button onClick={handleSubmitButtonClick}>Submit</Button>
+          <Button onClick={handleSubmitButtonClick}>
+            {homework.submittedOnDate ? 'Resubmit' : 'Submit'}
+          </Button>
         ) : (
           <OverlayTrigger
             placement="bottom"
@@ -259,7 +262,7 @@ function HomeworkEngager(props) {
             }
           >
             <Button className={styles.disabledButton} type="button">
-              Submit
+              {homework.submittedOnDate ? 'Resubmit' : 'Submit'}
             </Button>
           </OverlayTrigger>
         )}

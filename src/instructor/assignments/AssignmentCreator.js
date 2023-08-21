@@ -42,6 +42,7 @@ const emptyAssignment = {
   lockOnDate: 0,
   isUseAutoScore: true,
   isUseAutoSubmit: false,
+  allowResubmission: false,
 
   // This data is specific to the tool (Quiz tool data is just an array of questions & answers)
   isArchived: false,
@@ -111,6 +112,13 @@ function AssignmentCreator() {
     });
   }
 
+  function toggleAllowResubmission(e) {
+    setFormData({
+      ...formData,
+      allowResubmission: !formData.allowResubmission,
+    });
+  }
+
   function handleToolChanges(toolAssignmentData) {
     setFormData({ ...formData, toolAssignmentData });
   }
@@ -161,8 +169,7 @@ function AssignmentCreator() {
             ]}
           >
             <p>
-              Assignment has been saved! In order to access it, use this
-              assignmentId: ${activeModal.id}
+              {`Assignment has been saved! In order to access it, use this assignmentId: ${activeModal.id}`}
             </p>
           </ConfirmationModal>
         );
@@ -286,6 +293,25 @@ function AssignmentCreator() {
               </Col>
             </Row>
           )}
+          <Row className="ml-2 mt-2">
+            <Col className="col-6">
+              <label>
+                <h3>Allow resubmission</h3>
+              </label>
+            </Col>
+            <Col className="col-6 d-flex flex-row-reverse">
+              <div
+                className="custom-control custom-switch"
+                style={{ top: `6px` }}
+              >
+                <ToggleSwitch
+                  id="allowResubmission"
+                  value={formData.allowResubmission}
+                  handleToggle={toggleAllowResubmission}
+                />
+              </div>
+            </Col>
+          </Row>
         </Container>
       </form>
 
