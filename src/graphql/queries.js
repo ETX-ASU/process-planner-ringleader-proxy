@@ -188,7 +188,6 @@ export const listHomeworks = /* GraphQL */ `
                   label
                   done
                 }
-                nextToken
               }
             }
             ownerId
