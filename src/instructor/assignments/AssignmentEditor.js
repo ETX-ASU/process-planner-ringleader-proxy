@@ -19,6 +19,7 @@ import ConfirmationModal from "../../app/components/ConfirmationModal";
 import { reportError } from "../../developer/DevUtils";
 import { handleConnectToLMS } from "../../lmsConnection/RingLeader";
 import { v4 as uuid } from "uuid";
+import { IGNORE_LIMITED_EDITING } from "../../config";
 
 function AssignmentEditor() {
   const dispatch = useDispatch();
@@ -238,7 +239,7 @@ function AssignmentEditor() {
                 style={{ top: `6px` }}
               >
                 <ToggleSwitch
-                  disabled={isLimitedEditing}
+                  disabled={isLimitedEditing && !IGNORE_LIMITED_EDITING}
                   value={formData.isUseAutoScore}
                   handleToggle={toggleUseAutoScore}
                 />
@@ -252,7 +253,7 @@ function AssignmentEditor() {
                   <span className="mr-2">
                     <input
                       type={"checkbox"}
-                      disabled={isLimitedEditing}
+                      disabled={isLimitedEditing && !IGNORE_LIMITED_EDITING}
                       onChange={(e) =>
                         setFormData({
                           ...formData,
@@ -292,7 +293,7 @@ function AssignmentEditor() {
       {isSubmitting && <FullscreenOverlay />}
 
       <ProcessPlannerEditor
-        isLimitedEditing={isLimitedEditing}
+        isLimitedEditing={isLimitedEditing && !IGNORE_LIMITED_EDITING}
         isUseAutoScore={formData.isUseAutoScore}
         userId={activeUser.id}
         toolAssignmentData={formData.toolAssignmentData}
