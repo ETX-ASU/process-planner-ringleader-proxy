@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { API } from "aws-amplify";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAssignment as updateAssignmentMutation } from "../../graphql/mutations";
@@ -33,6 +33,7 @@ function AssignmentEditor() {
   );
   const [activeModal, setActiveModal] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const reminderCheckboxRef = useRef(null);
 
   async function handleCancelBtn() {
     if (!urlAssignmentId) {
@@ -43,6 +44,24 @@ function AssignmentEditor() {
   }
 
   async function handleUpdateBtn() {
+    if (window.localStorage.getItem('newTabReminderSilenced')) {
+      saveAssignment();
+      return;
+    }
+
+    setActiveModal({ type:MODAL_TYPES.notificationBeforeSave });
+  }
+
+  function handleReminderClose() {
+    if (reminderCheckboxRef.current?.checked) {
+      window.localStorage.setItem('newTabReminderSilenced', true);
+    }
+
+    setActiveModal(null);
+    saveAssignment();
+  }
+
+  async function saveAssignment() {
     // TODO: Bonus. Add mechanism to verify or perhaps create an undo mechanism, so maybe record previous state here before API call?
     if (!formData.title) return;
 
@@ -155,9 +174,25 @@ function AssignmentEditor() {
           >
             <p>Do you want to cancel editing this assignment or continue?</p>
             <p>
-              Canceling will loose any changes you may have made to this
+              Canceling will lose any changes you may have made to this
               assignment.
             </p>
+          </ConfirmationModal>
+        );
+      case MODAL_TYPES.notificationBeforeSave:
+        return (
+          <ConfirmationModal 
+            isStatic
+            title="Important"
+            buttons={[{ name: 'Got it', onClick: handleReminderClose }]}
+          >
+            <p>In your LMS, we strongly recommend for you to set this Tool to open in a new tab for a better viewing experience. For example, Canvas has a checkbox labeled “open in a new tab” that you can check.</p>
+            <div className="d-flex align-items-center gap-2">
+              <input type="checkbox" id="newTabReminder" ref={reminderCheckboxRef} />
+              <label htmlFor="newTabReminder">
+                Do not show this message again
+              </label>
+            </div>
           </ConfirmationModal>
         );
       default:
